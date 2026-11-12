@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Causal Thinking for Analysts</title>
+<meta name="description" content="A self-paced training program for LNS Research analysts: climbing Pearl's Ladder of Causation with stories from our own fall 2026 sessions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/lab.css">
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" aria-controls="sidenav" aria-expanded="false">☰ Modules</button>
+
+<div class="layout">
+  <nav class="sidenav" id="sidenav" aria-label="Program modules">
+    <div class="brand"><small>LNS Research · Analyst training</small>Causal Thinking for Analysts</div>
+    <div class="progress"><span id="progressText">0 of 10 modules complete</span>
+      <div class="progress-bar"><span id="progressFill"></span></div></div>
+    <ol id="navList">
+      <li><a href="#m1" data-mod="m1"><span class="num"><span>1</span></span>Why the “why”</a></li>
+      <li><a href="#m2" data-mod="m2"><span class="num"><span>2</span></span>Pearl's Ladder</a></li>
+      <li><a href="#m3" data-mod="m3"><span class="num"><span>3</span></span>Chains, forks, colliders</a></li>
+      <li><a href="#m4" data-mod="m4"><span class="num"><span>4</span></span>Where our claims sit</a></li>
+      <li><a href="#m5" data-mod="m5"><span class="num"><span>5</span></span>The eight causal moves</a></li>
+      <li><a href="#m6" data-mod="m6"><span class="num"><span>6</span></span>Coaching moments</a></li>
+      <li><a href="#m7" data-mod="m7"><span class="num"><span>7</span></span>Stress-test exercise</a></li>
+      <li><a href="#m8" data-mod="m8"><span class="num"><span>8</span></span>Before it goes on a slide</a></li>
+      <li><a href="#lab" data-mod="lab"><span class="num"><span>9</span></span>Insight Challenge Lab</a></li>
+      <li><a href="#m10" data-mod="m10"><span class="num"><span>10</span></span>Say it in the room</a></li>
+    </ol>
+    <div class="nav-foot">
+      <button class="icon-btn" id="themeBtn" title="Toggle light/dark">◐ Theme</button>
+      <button class="icon-btn" id="resetBtn" title="Clear progress and notes">Reset</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <div class="inner" style="max-width:960px;margin:0 auto">
+        <span class="eyebrow">Analyst training program · Fall 2026</span>
+        <h1>Say why, not just what</h1>
+        <p class="lede">Causal thinking is LNS Research's messaging advantage. This program teaches it through what we — and the people in the room — actually said at the fall roundtables and council meetings.</p>
+        <div class="hero-meta">
+          <div><strong>10</strong>modules</div>
+          <div><strong>8</strong>causal moves</div>
+          <div><strong>3</strong>interactive labs</div>
+          <div><strong>~90</strong>minutes</div>
+        </div>
+        <a class="cta" href="#m1">Start the program</a>
+        <a class="cta" href="#lab" style="background:transparent;color:var(--accent);border:1.5px solid var(--accent);margin-left:8px">Challenge one of your insights →</a>
+      </div>
+    </header>
+
+    <!-- M1 -->
+    <section class="module" id="m1" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 1 · The demand side</span>
+        <h2>Our audience is paying for the “why”</h2>
+        <p class="lede">Council members aren't asking for more statistics. They're asking which levers matter and what to stop doing.</p>
+        <div class="card mt">
+          <blockquote class="big">“Research at your fingertips that helps you understand what makes things true — not to believe that yesterday is going to tell you what's going to work tomorrow. That does not work anymore.”
+            <span class="cite">— Mike Carroll, COO Council</span></blockquote>
+        </div>
+        <div class="grid g3 mt">
+          <div class="card"><h4>What not to do</h4><p>“A good and decent understanding of what not to do, rather than what to do.”</p><span class="source">Council member, former CPG supply chain head</span></div>
+          <div class="card"><h4>Which two of the eight</h4><p>“If you're doing eight different things, what are the two things that are actually going to matter?”</p><span class="source">Mehul Shah, COO Council</span></div>
+          <div class="card"><h4>Outside-in, not flattery</h4><p>Very few analysts will “tell you what really is the perception.”</p><span class="source">Council member, on staying engaged with LNS</span></div>
+        </div>
+        <div class="takeaway">A benchmark tells a client where they stand. A causal claim tells them what to change — and what to stop doing. That is the product.</div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m1" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m2">Next: Pearl's Ladder →</a></div>
+      </div>
+    </section>
+
+    <!-- M2 -->
+    <section class="module" id="m2" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 2 · The framework</span>
+        <h2>Pearl's Ladder of Causation</h2>
+        <p class="lede">Three kinds of question, each needing more than the one below it to answer. Our survey statistics mostly live on Rung 1. Our clients decide on Rungs 2 and 3.</p>
+        <div class="ladder mt">
+          <div class="rung l3"><div class="label"><span class="n">Rung 3 · Imagining</span><span class="t">Counterfactuals</span></div>
+            <div><div class="q">“What if I had done X?” Was it X that caused Y?</div>
+            <div class="atlns"><b>At LNS:</b> “Would this deal have hit its targets if the thesis had been tested in diligence?” Mike: “Do you really know what happens when you take it away?”</div></div></div>
+          <div class="rung l2"><div class="label"><span class="n">Rung 2 · Doing</span><span class="t">Intervention</span></div>
+            <div><div class="q">“What if I do X?” What happens to Y if we change X?</div>
+            <div class="atlns"><b>At LNS:</b> “If a client deploys OpEx enterprise-wide, will productivity compound?” Answering takes an experiment, or a causal model applied to the data.</div></div></div>
+          <div class="rung l1"><div class="label"><span class="n">Rung 1 · Seeing</span><span class="t">Association</span></div>
+            <div><div class="q">“What if I see X?” How are X and Y related?</div>
+            <div class="atlns"><b>At LNS:</b> “Market shapers are 8.8× more likely to run OpEx enterprise-wide.” Survey cross-tabs and benchmarks live here.</div></div></div>
+        </div>
+        <p class="source" style="margin-top:10px">Adapted from Judea Pearl &amp; Dana Mackenzie, <i>The Book of Why</i> (2018)</p>
+
+        <h3 class="mt">Data alone can't climb the ladder</h3>
+        <div class="grid g2">
+          <div class="card">
+            <p>Pearl's central point: without an experiment, no amount of observational data answers a Rung 2 question on its own. Getting from “seeing” to “doing” takes causal assumptions — a model of what causes what.</p>
+            <ul style="padding-left:18px;color:var(--ink-2);font-size:.93rem">
+              <li>A survey cross-tab, however large the sample, is Rung 1.</li>
+              <li>Our causal models — the risk-centric network and its success-side mirror — are those assumptions written down, so the data can test them.</li>
+              <li>The model is what lets CDI carry an insight into one client's context: Matt's “adjacency problem.”</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>How a council research topic climbs <span class="source" style="font-weight:500">(Mehul, CEO Council)</span></h4>
+            <ol class="steps">
+              <li><div><b>Build the perspective</b><span>Knowledge document, iterated with the council sponsor</span></div></li>
+              <li><div><b>Hypothesize the causal model</b><span>Write down what we believe causes what</span></div></li>
+              <li><div><b>Field the survey</b><span>Collect Rung 1 data built to test the model</span></div></li>
+              <li><div><b>Update the model</b><span>Keep the links that survive; drop the ones that don't</span></div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="takeaway">A cross-tab earns “is associated with.” Only a model the data has tested earns “if you do this.”</div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m2" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m3">Next: Chains, forks, colliders →</a></div>
+      </div>
+    </section>
+
+    <!-- M3 -->
+    <section class="module" id="m3" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 3 · Building blocks</span>
+        <h2>Three junctions every causal diagram is built from</h2>
+        <p class="lede">Each behaves differently when you “control for” the middle variable. Most errors in Moves 1, 6 and 8 trace back to one of these.</p>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" style="color:var(--ink-2)"/></marker>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" style="color:var(--ink-2)"/></marker>
+        </defs></svg>
+        <div class="grid g3 mt">
+          <div class="card junction">
+            <h3><small>Chain</small>The mechanism</h3>
+            <svg viewBox="0 0 260 90" role="img" aria-label="X arrow M arrow Y">
+              <circle class="node" cx="35" cy="45" r="24"/><text x="35" y="45">X</text>
+              <circle class="node hl" cx="130" cy="45" r="24"/><text x="130" y="45">M</text>
+              <circle class="node" cx="225" cy="45" r="24"/><text x="225" y="45">Y</text>
+              <path class="edge" d="M61 45 H102"/><path class="edge" d="M156 45 H197"/>
+            </svg>
+            <p>M carries X's effect to Y. This is the “because”: decision speed → compounding advantage → productivity. Don't control away the mechanism and then conclude X does nothing.</p>
+          </div>
+          <div class="card junction">
+            <h3><small>Fork</small>The confounder</h3>
+            <svg viewBox="0 0 260 120" role="img" aria-label="Z causes both X and Y">
+              <circle class="node hl" cx="130" cy="30" r="24"/><text x="130" y="30">Z</text>
+              <circle class="node" cx="45" cy="92" r="24"/><text x="45" y="92">X</text>
+              <circle class="node" cx="215" cy="92" r="24"/><text x="215" y="92">Y</text>
+              <path class="edge" d="M110 45 L68 76"/><path class="edge" d="M150 45 L192 76"/>
+              <path class="dash" d="M72 96 H188"/>
+            </svg>
+            <p>A common cause Z moves X and Y together with no arrow between them. Rapid growth could lift both high tech's investment and its productivity numbers. Account for Z to close the “back door.”</p>
+          </div>
+          <div class="card junction">
+            <h3><small>Collider</small>The selection trap</h3>
+            <svg viewBox="0 0 260 120" role="img" aria-label="X and Y both cause Z">
+              <circle class="node" cx="45" cy="30" r="24"/><text x="45" y="30">X</text>
+              <circle class="node" cx="215" cy="30" r="24"/><text x="215" y="30">Y</text>
+              <circle class="node hl" cx="130" cy="92" r="24"/><text x="130" y="92">Z</text>
+              <path class="edge" d="M66 44 L106 76"/><path class="edge" d="M194 44 L154 76"/>
+            </svg>
+            <p>X and Y both cause Z. Filter on Z and you manufacture a link. Did our M&amp;A sample include abandoned deals? The “oldest plant” story exists because that plant survived.</p>
+          </div>
+        </div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m3" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m4">Next: Where our claims sit →</a></div>
+      </div>
+    </section>
+
+    <!-- M4 -->
+    <section class="module" id="m4" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 4 · Self-diagnosis</span>
+        <h2>Where our claims sit on the ladder</h2>
+        <p class="lede">A Rung 1 claim is not wrong. It's incomplete — and it becomes wrong when it's spoken in Rung 2 language.</p>
+        <div class="grid g5 spectrum mt">
+          <div class="card"><span class="tag r1">Rung 1</span><h4>1. Describe</h4><p>“65% of manufacturers struggle with the loss of industrial knowledge.”</p><span class="source">KM roundtable</span></div>
+          <div class="card"><span class="tag r1">Rung 1</span><h4>2. Compare</h4><p>“Market shapers are 8.8× more likely to run OpEx enterprise-wide.”</p><span class="source">OpEx roundtable</span></div>
+          <div class="card"><span class="tag r2">Model for Rung 2</span><h4>3. Mechanism</h4><p>Expert-dependent programs fall apart when the experts move on; systematized ones carry the gains forward.</p><span class="source">OpEx roundtable</span></div>
+          <div class="card"><span class="tag r2">Rung 2</span><h4>4. Conditions</h4><p>Pushing decisions down helps only once expertise, decision rights, and guardrails are defined.</p><span class="source">COO Council</span></div>
+          <div class="card"><span class="tag r3">Rung 3</span><h4>5. Counterfactual</h4><p>“Do you really know what happens when you take it away?”</p><span class="source">Mike Carroll, COO Council</span></div>
+        </div>
+        <div class="spectrum-bar"><div class="r1">← Rung 1: most industry and vendor messaging stops here</div><div class="r2" style="text-align:right">Rungs 2–3: where LNS differentiates →</div></div>
+
+        <h3 class="mt">Quick check: which rung is this?</h3>
+        <p>Pick the rung each statement is actually claiming. <span class="score" id="rungScore"></span></p>
+        <div class="stack" id="rungQuiz"></div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m4" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m5">Next: The eight moves →</a></div>
+      </div>
+    </section>
+
+    <!-- M5 MOVES -->
+    <section class="module" id="m5" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 5 · The core skill</span>
+        <h2>Eight causal moves</h2>
+        <p class="lede">Each one illustrated with something we — or the people in the room — actually said.</p>
+        <div class="move-index">
+          <a href="#mv1"><span class="n">1</span><span class="t">Name the mechanism, not just the multiplier</span></a>
+          <a href="#mv2"><span class="n">2</span><span class="t">Separate symptoms (and surface effects) from causes</span></a>
+          <a href="#mv3"><span class="n">3</span><span class="t">Try to prove yourself wrong</span></a>
+          <a href="#mv4"><span class="n">4</span><span class="t">“Matters” is not “differentiates”</span></a>
+          <a href="#mv5"><span class="n">5</span><span class="t">Find the conditions</span></a>
+          <a href="#mv6"><span class="n">6</span><span class="t">Check the arrow and the confounders</span></a>
+          <a href="#mv7"><span class="n">7</span><span class="t">Think in systems</span></a>
+          <a href="#mv8"><span class="n">8</span><span class="t">State the counterfactual</span></a>
+        </div>
+
+        <!-- Move 1 -->
+        <article class="move" id="mv1">
+          <div class="move-head"><span class="move-num">1</span><div><span class="tag r2">Rung 2</span><h3 style="margin:4px 0 0">Name the mechanism, not just the multiplier</h3></div></div>
+          <p>A multiplier says two things travel together. A mechanism says why — and gives the client something to act on. In Pearl's terms, the mechanism is the mediator in a chain.</p>
+          <div class="grid g2">
+            <div class="card"><h4>Story: decision velocity → compounding advantage</h4>
+              <blockquote>“If I can make the right decision faster than my competition, that gives me a little chunk of advantage over them… even if it's not significant, it's compounding over time.”<span class="cite">— Jim Wells, OpEx roundtable</span></blockquote></div>
+            <div class="card"><h4>Story: the data-to-action cycle</h4>
+              <div class="cycle"><span>Data</span><i>→</i><span>Information</span><i>→</i><span class="lost">Insight</span><i>→</i><span class="lost">Trust</span><i>→</i><span class="lost">Action</span></div>
+              <p style="font-size:.92rem;color:var(--ink-2)">Data and information are largely solved — we have “dashboard fatigue.” Insight → trust → action is the “inference payload” experienced workers carried invisibly, and the part that retires with them. <span class="source">KM roundtable</span></p>
+              <p style="font-size:.92rem"><i>“An insight that is not acted on is worth nothing.”</i> — Jim Wells</p></div>
+          </div>
+          <div class="habit"><b>Habit:</b> after every “X× more likely,” finish the sentence with “because…” If you can't, the stat isn't ready for a client.</div>
+        </article>
+
+        <!-- Move 2 -->
+        <article class="move" id="mv2">
+          <div class="move-head"><span class="move-num">2</span><div><span class="tag r12">Rung 1 → 2</span><h3 style="margin:4px 0 0">Separate symptoms from causes</h3></div></div>
+          <p>Ask of every metric: is this the thing, or the smoke from the thing? This move has three stories — pick one.</p>
+          <div class="tabs" role="tablist">
+            <button role="tab" aria-selected="true" aria-controls="t-rccn" id="tb-rccn">Symptoms vs. causes</button>
+            <button role="tab" aria-selected="false" aria-controls="t-swim" id="tb-swim">Surface effect: “leaders do more”</button>
+            <button role="tab" aria-selected="false" aria-controls="t-collab" id="tb-collab">Surface effect: collaboration</button>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="t-rccn" aria-labelledby="tb-rccn">
+            <div class="grid g2">
+              <div class="card"><h4>The RCCN structure</h4>
+                <div class="rccn">
+                  <div class="top"><b>Root causes &amp; preventive actions</b><span>What our knowledge document says produces the outcome</span></div>
+                  <div class="arrow">↓</div>
+                  <div class="mid">Target condition<br><span>e.g., the acquisition fails to deliver its value</span></div>
+                  <div class="arrow">↓</div>
+                  <div class="bot"><b>Visible symptoms</b><span>What you'd observe when diagnosing an organization</span></div>
+                </div>
+                <p class="source" style="margin-top:10px">A success-side network mirrors it.</p></div>
+              <div class="stack">
+                <div class="card"><h4>KM roundtable</h4><p style="margin:0">Declining safety, quality and productivity are the symptoms. The cause is the loss of tacit judgment — the insight-to-action step experienced workers performed invisibly.</p></div>
+                <div class="card"><h4>COO Council (participant)</h4><blockquote style="font-size:1rem">“We were looking at attrition… in reality, it was the mission that was linked to the attrition, and the culture was actually linked to their job satisfaction.”</blockquote><p style="margin:10px 0 0;font-size:.9rem;color:var(--ink-2)">Low attrition was hiding a disengagement problem.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="t-swim" aria-labelledby="tb-swim" hidden>
+            <p>A <b>surface effect</b> is the visible evidence of a causal relationship: a real, repeatable pattern downstream of the true cause. It shows up reliably in Rung 1 data. Push on it directly and little moves — because the cause is somewhere else.</p>
+            <div class="card surface-diagram">
+              <svg viewBox="0 0 720 230" role="img" aria-label="Operational discipline causes both swim-lane breadth and leader performance">
+                <rect class="hid" x="250" y="15" width="220" height="62"/><text class="sub" x="360" y="38">Hidden — the true cause</text><text x="360" y="60">Excellent operational discipline</text>
+                <rect class="vis" x="20" y="150" width="240" height="62"/><text class="sub" x="140" y="173">Visible — the surface effect</text><text x="140" y="195">More swim lanes, at scale</text>
+                <rect class="out" x="460" y="150" width="240" height="62"/><text class="sub" x="580" y="173">The outcome clients want</text><text x="580" y="195">Leader-level performance</text>
+                <path class="edge" d="M300 78 L175 146"/><path class="edge" d="M420 78 L545 146"/>
+                <path class="dash" d="M262 181 H456"/><text class="dlabel" x="360" y="172">what a cross-tab shows</text>
+              </svg>
+            </div>
+            <div class="flow mt">
+              <div><span class="tag r1">Rung 1</span><h4>What the data showed</h4><p>Leaders are active across more swim lanes of transformation than followers.</p></div>
+              <div><span class="tag r2">Read as Rung 2</span><h4>What clients heard</h4><p>“Do more to succeed.” Launch initiatives in more swim lanes.</p></div>
+              <div><span class="tag" style="background:var(--warn-soft);color:var(--warn)">From the room</span><h4>What pushing the surface does</h4><p>Initiatives without the discipline to scale stall as pilots: “let's have this pilot, try this thing… no real line organizing it.”</p></div>
+              <div><span class="tag r2">LNS read</span><h4>The causal story</h4><p>Operational discipline — stabilize, standardize, systematize, sustain — lets each deployment scale. Breadth is the evidence it leaves.</p></div>
+            </div>
+            <div class="better"><b>Better:</b> “Leaders don't win because they do more. They do more because their operational discipline lets each deployment scale. Build the discipline; breadth follows.”</div>
+            <div class="habit"><b>Surface-effect test:</b> if the client forced X up tomorrow and changed nothing else, would Y move? If it depends on something else being in place, X is the evidence — and that something is the cause.</div>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="t-collab" aria-labelledby="tb-collab" hidden>
+            <div class="ba">
+              <div class="card was"><h4>What we theorized</h4><p style="margin:0">More collaboration and pushing decisions to the front line are best practices that lead to better problem solving and faster decisions.</p></div>
+              <div class="card now"><h4>What the culture data said</h4><p style="margin:0">On their own, <b>“dead wrong.”</b> Collaboration and frontline decisions were the visible evidence, not the lever.</p></div>
+            </div>
+            <div class="card mt">
+              <div class="loop" style="justify-content:center">
+                <span style="background:var(--rung2-soft);color:var(--rung2)">Engineered collaboration<br><small style="font-weight:500">expertise · decision rights · guardrails</small></span><i>→</i>
+                <span style="background:var(--surface-2)">Better decisions, made at the edge</span><i>→</i>
+                <span style="background:var(--surface-2)">Edge decisions that accumulate</span><i>→</i>
+                <span style="background:var(--good-soft);color:var(--good)">3× more likely to be a World's Most Productive company</span>
+              </div>
+              <p class="source" style="text-align:center;margin-top:12px">Mature decision intelligence architecture · IPI research · a Rung 1 association; the chain is our model of why</p>
+            </div>
+            <div class="better"><b>Better:</b> “Collaboration isn't the lever; designed collaboration is. Define who holds the expertise, who holds the decision, and the guardrails — then decisions at the edge add up to advantage.”</div>
+          </div>
+          <div class="takeaway">“What we thought was causal turned out to be just the visible symptoms.” — Jim Wells, COO Council</div>
+        </article>
+
+        <!-- Move 3 -->
+        <article class="move" id="mv3">
+          <div class="move-head"><span class="move-num">3</span><div><span class="tag r12">Rung 1 → 2</span><h3 style="margin:4px 0 0">Try to prove yourself wrong</h3></div></div>
+          <blockquote class="big">“Any good causal scientist can prove something right. It's when you disprove something that you know you're really doing it right.”<span class="cite">— Mike Carroll</span></blockquote>
+          <div class="table-wrap mt"><table>
+            <thead><tr><th>We believed</th><th>The data said</th></tr></thead>
+            <tbody>
+              <tr><td>More collaboration, and pushing decisions to the lowest level, are always better.</td><td>“Dead wrong” — unless collaboration is engineered through identified expertise, decision rights and guardrails. Then it matters, and mature decision architecture goes with 3× the odds of being a World's Most Productive company.</td></tr>
+              <tr><td>Converting intent into execution separates M&amp;A leaders from followers.</td><td>True everywhere we looked except M&amp;A. Everyone runs a disciplined playbook; leader–follower gaps were 1–3 points. The differentiator sits upstream, in diligence.</td></tr>
+            </tbody></table></div>
+          <div class="takeaway">Why it sells: saying “we were wrong” in front of COOs made the rest of the findings more credible. The real learning happens when you are wrong and ask why.</div>
+        </article>
+
+        <!-- Move 4 -->
+        <article class="move" id="mv4">
+          <div class="move-head"><span class="move-num">4</span><div><span class="tag r1">Rung 1</span><h3 style="margin:4px 0 0">“Matters” is not the same as “differentiates”</h3></div></div>
+          <p>If nearly everyone does it, it can't explain who wins. Low variance means low explanatory power — not zero importance.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Domain</th><th>Table stakes — everyone does it</th><th>What actually separates</th></tr></thead>
+            <tbody>
+              <tr><td>M&amp;A</td><td>Disciplined integration execution (leader–follower gaps of 1–3 points)</td><td>A value thesis tested in diligence, before close</td></tr>
+              <tr><td>Productivity</td><td>Plant OEE, quality, uptime, on-time delivery — flat across tiers</td><td>Agility: about a third more changeovers, higher capacity utilization, better forecast accuracy and inventory turns</td></tr>
+              <tr><td>OpEx tools</td><td>Digitized five whys and other tools — adoption up 60%+ from 2019 to 2023</td><td>Constraint focus deciding where the tools get pointed</td></tr>
+            </tbody></table></div>
+          <div class="habit"><b>Caution:</b> don't let “not a differentiator” become “doesn't matter.” Jim, at the council: “What I don't want you to take from this is that disciplined execution doesn't matter, because it does matter. It's just not differentiating.”</div>
+        </article>
+
+        <!-- Move 5 -->
+        <article class="move" id="mv5">
+          <div class="move-head"><span class="move-num">5</span><div><span class="tag r2">Rung 2</span><h3 style="margin:4px 0 0">Find the conditions: “true, except when…”</h3></div></div>
+          <p>Conditions are what make an insight travel into a client's context — Matt's “adjacency problem.” A finding with no boundary conditions is a platitude.</p>
+          <div class="grid g4">
+            <div class="card"><h4>Collaboration</h4><p style="font-size:.92rem">Helps only when expertise, decision rights and guardrails are defined.</p><span class="source">COO Council</span></div>
+            <div class="card"><h4>Customer focus</h4><p style="font-size:.92rem">Text analysis linked customer-focused language to ~3.4× equity performance — except where customers have no choice, as with utilities.</p><span class="source">COO Council</span></div>
+            <div class="card"><h4>Adaptive work design</h4><p style="font-size:.92rem">“Adaptability is a function of optionality.” Companies trapped by knowledge loss lose the option.</p><span class="source">KM roundtable</span></div>
+            <div class="card"><h4>M&amp;A archetype</h4><p style="font-size:.92rem">The aggregate “70% of deals fail” hides the spread by archetype. Opportunistic carve-outs performed worst.</p><span class="source">Veena prep call</span></div>
+          </div>
+        </article>
+
+        <!-- Move 6 -->
+        <article class="move" id="mv6">
+          <div class="move-head"><span class="move-num">6</span><div><span class="tag r12">Rung 1 → 2</span><h3 style="margin:4px 0 0">Check the arrow and the confounders first</h3></div></div>
+          <p>The room will supply the alternative explanation. Each of these came from the audience:</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Our finding</th><th>Challenge from the room</th><th>What it tests</th></tr></thead>
+            <tbody>
+              <tr><td>High tech and automotive lead productivity growth</td><td>“If you're growing like a Foxconn, 50–60% a year,” you get leverage; automotive utilization is “less than 50%” — just relative numbers?</td><td><span class="tag r1">Confounder</span> growth; base effect</td></tr>
+              <tr><td>Heavily regulated industries lag</td><td>Matt: life sciences and A&amp;D outperform — but also had the most new capacity investment.</td><td><span class="tag r1">Confounder</span> capital investment</td></tr>
+              <tr><td>Units on recall nearly tripled since 2019</td><td>“Is that also because we're getting better at finding these, or changing the definition?”</td><td><span class="tag r3">Measurement</span> artifact</td></tr>
+              <tr><td>Knowledge loss forces companies to adapt</td><td>Our own data: adaptability tracks optionality; trapped companies adapt less.</td><td><span class="tag r2">Direction</span> reversed arrow</td></tr>
+            </tbody></table></div>
+          <div class="takeaway">Get there first. Name the alternative, say what you checked (on recalls: the count of recalls still rises, more slowly), then state the mechanism you believe.</div>
+        </article>
+
+        <!-- Move 7 -->
+        <article class="move" id="mv7">
+          <div class="move-head"><span class="move-num">7</span><div><span class="tag r2">Rung 2</span><h3 style="margin:4px 0 0">Think in systems: trade-offs, buffers, thresholds</h3></div></div>
+          <div class="card"><div class="loop"><span>Maximize utilization</span><i>→</i><span>Buffer gets used up</span><i>→</i><span>Shock or demand shift</span><i>→</i><span>Fragile, lost agility</span></div>
+            <blockquote style="margin-top:16px;font-size:1.05rem">“If you have uncertainty, you need to have a buffer… if you use it up managerially, you lock yourself in and you lose agility.”<span class="cite">— Council member, operations academic</span></blockquote></div>
+          <div class="grid g3 mt">
+            <div class="card"><h4>Diminishing returns</h4><p style="font-size:.92rem;margin:0">Past parity, the plant-efficiency mindset stops paying; get the network agile and invest in speed and customer intimacy.</p></div>
+            <div class="card"><h4>Second-order effects</h4><p style="font-size:.92rem;margin:0">Outsourcing → fragmentation → you can't close the learning loop fast enough → decision latency. (Mike)</p></div>
+            <div class="card"><h4>Thresholds</h4><p style="font-size:.92rem;margin:0">KM payoff concentrates at the top maturity tier. Build the case in two stages; don't expect gains in the pilot.</p></div>
+          </div>
+          <div class="takeaway">When a client asks “how much more X should we do,” the causal answer often includes “until here, then stop.”</div>
+        </article>
+
+        <!-- Move 8 -->
+        <article class="move" id="mv8">
+          <div class="move-head"><span class="move-num">8</span><div><span class="tag r3">Rung 3</span><h3 style="margin:4px 0 0">State the counterfactual: “compared to what?”</h3></div></div>
+          <p>Every finding and every ROI needs the do-nothing path — and a clear view of which failure you're guarding against.</p>
+          <div class="grid g3">
+            <div class="card"><h4>A · Bend the curve</h4><p style="font-size:.92rem">Amgen measures cost of quality per unit against a “do nothing” curve as volume scales — not against last year's spend.</p><span class="source">CQO roundtable</span></div>
+            <div class="card"><h4>B · Avoided growth, not cuts</h4><p style="font-size:.92rem">“I may not have to put in as many future requisitions.” Elsewhere, inspection findings added ~150 FTE of deviation work; the AI case targets that increment.</p><span class="source">CQO roundtable participants</span></div>
+            <div class="card"><h4>C · Decompose the failure</h4><p style="font-size:.92rem">Deals fail because “you should never have done it,” because they were executed badly, or “because it's actually just hard.” Three causes, three fixes.</p><span class="source">Council member, COO Council</span></div>
+          </div>
+          <div class="habit"><b>Ask clients:</b> what happens on the do-nothing path, and which kind of failure is this investment guarding against?</div>
+        </article>
+        <div class="module-foot"><button class="complete-btn" data-complete="m5" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m6">Next: Coaching moments →</a></div>
+      </div>
+    </section>
+
+    <!-- M6 -->
+    <section class="module" id="m6" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 6 · Coaching moments</span>
+        <h2>Where our language drifted from association to causation</h2>
+        <h3 class="mt">Juxtaposition reads as causation, intended or not</h3>
+        <div class="trio">
+          <div class="card"><h4>What we said · Matt, COO session</h4><p style="margin:0">“91% of companies… say they're either adopted or going to adopt this… So everybody's doing it, but 85% of companies are less productive.”</p></div>
+          <div class="card"><h4>What the room heard</h4><p style="margin:0">“90-something percent of us have adopted AI, and 85% of us are less efficient than we were before we started.”</p></div>
+          <div class="card"><h4>What the data says · IPI</h4><p style="margin:0">The 85% is a cohort: competitive operators outside the top ~15%, who averaged about −2% productivity. Nothing in it says AI made anyone less productive.</p></div>
+        </div>
+        <div class="better"><b>Better:</b> “Adoption is nearly universal, so adoption alone can't explain who's winning. The question is what the top 15% do differently with it.”</div>
+
+        <h3 class="mt">Watch the drift from “more likely” to “the lever”</h3>
+        <p>Our multipliers are Rung 1. “The lever” is a Rung 2 claim — it needs a mechanism and a tested model, and the client needs a way to test it.</p>
+        <div class="stack">
+          <div class="ba"><div class="card was"><h4>As said</h4><p style="margin:0">“Organizations that… [have] deployed across the enterprise are 8.8 times more likely to be a market shaping company… so this is the big lever.”</p></div>
+            <div class="card now"><h4>Stronger</h4><p style="margin:0">Market shapers are 8.8× more likely to run OpEx enterprise-wide. Our read on why: a program that lives in a few experts' heads resets when they leave; one built into the way work is done keeps compounding. <b>Test:</b> would your program survive its champion leaving?</p></div></div>
+          <div class="ba"><div class="card was"><h4>As said</h4><p style="margin:0">“[Those that did both] are 1.4 times more likely to meet their targets.”</p></div>
+            <div class="card now"><h4>Stronger</h4><p style="margin:0">Assessing what the target does well forces process understanding before close; adopting its practices keeps the thesis honest. The stronger signal is the downside: 2.4× less likely to recalibrate mid-deal, 2.6× less likely to see the legacy business degrade.</p></div></div>
+          <div class="ba"><div class="card was"><h4>As said</h4><p style="margin:0">“Leaders are two and a half times more likely to run a single consolidated enterprise data platform.”</p></div>
+            <div class="card now"><h4>Stronger</h4><p style="margin:0">Trust is the gate between insight and action, and one source of truth is what earns it. Leaders are 1.8× more likely to trust and act on their analytics. Layer AI over 18 sources of truth and it tells one plant's truth to another.</p></div></div>
+        </div>
+        <div class="takeaway">The pattern: association → the mechanism we believe → a test the client can run in their own organization.</div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m6" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m7">Next: Stress-test exercise →</a></div>
+      </div>
+    </section>
+
+    <!-- M7 -->
+    <section class="module exercise" id="m7" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 7 · Practice</span>
+        <h2>Your turn: stress-test five claims from the room</h2>
+        <p class="lede">For each, name the mechanism, one alternative explanation, the direction check, and the counterfactual. Then reveal the answer key. None of these claims is necessarily wrong — the exercise is finding what we'd need to make them defensible.</p>
+        <div class="stack mt" id="exerciseList"></div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m7" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m8">Next: Before it goes on a slide →</a></div>
+      </div>
+    </section>
+
+    <!-- M8 -->
+    <section class="module" id="m8" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 8 · The toolkit</span>
+        <h2>Seven questions before a number goes on a slide</h2>
+        <div class="grid g2 mt">
+          <ol class="steps card" style="padding:22px">
+            <li><div><b>Mechanism</b><span>Can I finish “because…” in one sentence?</span></div></li>
+            <li><div><b>Surface</b><span>If the client forced this up tomorrow, would the outcome move?</span></div></li>
+            <li><div><b>Alternatives</b><span>What else produces this pattern — growth, size, industry mix, regulation, capex?</span></div></li>
+            <li><div><b>Direction</b><span>Could the arrow run backward?</span></div></li>
+            <li><div><b>Conditions</b><span>When does it stop being true?</span></div></li>
+            <li><div><b>Variance</b><span>Does it differentiate, or is it table stakes?</span></div></li>
+            <li><div><b>Counterfactual</b><span>Compared to what? What happens if it's removed?</span></div></li>
+          </ol>
+          <div>
+            <h3>Keep the verb honest</h3>
+            <div class="verbs">
+              <div class="verb v1"><span class="v">“co-occurs with,” “is more common among”</span><span class="e"><b>Rung 1</b> · any survey cross-tab</span></div>
+              <div class="verb v2"><span class="v">“predicts”</span><span class="e"><b>Rung 1</b> · holds after accounting for obvious confounders</span></div>
+              <div class="verb v3"><span class="v">“drives,” “if you do X, expect Y”</span><span class="e"><b>Rung 2</b> · tested causal model, mechanism, survived disconfirmation</span></div>
+              <div class="verb v4"><span class="v">“would have,” “was responsible for”</span><span class="e"><b>Rung 3</b> · counterfactual reasoning about a specific case</span></div>
+            </div>
+            <p class="source" style="margin-top:10px">↓ Evidentiary burden rises down the list. When in doubt, use the weaker verb and add the “because.”</p>
+          </div>
+        </div>
+        <div class="takeaway">Want to run these seven questions against a real finding? The Insight Challenge Lab walks you through it.</div>
+        <div class="module-foot"><button class="complete-btn" data-complete="m8" aria-pressed="false">Mark module complete</button><a class="next-link" href="#lab">Next: Insight Challenge Lab →</a></div>
+      </div>
+    </section>
+
+    <!-- LAB -->
+    <section class="module lab" id="lab" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 9 · Insight Challenge Lab</span>
+        <h2>Bring an insight. Leave with a causal claim.</h2>
+        <p class="lede">Paste something you, a client, or a vendor has presented as an insight. The lab reads its language, tells you which rung it is claiming, and then challenges you through the seven questions — one at a time — before helping you rewrite it.</p>
+
+        <div class="card lab-shell mt">
+          <!-- Stage 0: input -->
+          <div class="lab-stage" id="labIntake">
+            <label class="lab-label" for="insightInput">The insight, as it was said or written</label>
+            <textarea id="insightInput" class="lab-input" rows="3" placeholder="e.g., “Leaders are 2.5× more likely to run a single consolidated enterprise data platform, so consolidating your data is the lever for AI success.”"></textarea>
+            <div class="lab-row">
+              <label class="lab-label sm" for="insightSource">Where it came from (optional)</label>
+              <input id="insightSource" class="lab-text" placeholder="e.g., our 2025 Data Architecture survey, a vendor keynote, a client QBR">
+            </div>
+            <div class="lab-actions">
+              <button class="lab-primary" id="labStart">Challenge this insight</button>
+              <span class="lab-or">or try one:</span>
+              <div class="lab-samples" id="labSamples"></div>
+            </div>
+          </div>
+
+          <!-- Stage 1: diagnosis -->
+          <div class="lab-stage" id="labDiagnosis" hidden>
+            <div class="lab-quote" id="labQuote"></div>
+            <div class="diag-grid">
+              <div class="diag-card">
+                <span class="lab-label sm">What its language claims</span>
+                <div class="diag-rung" id="diagClaimed"></div>
+                <p id="diagClaimedWhy"></p>
+              </div>
+              <div class="diag-card">
+                <span class="lab-label sm">What the evidence supports</span>
+                <div class="diag-rung" id="diagEvidence"></div>
+                <p id="diagEvidenceWhy"></p>
+              </div>
+            </div>
+            <div class="diag-flags" id="diagFlags"></div>
+            <div class="lab-q">
+              <span class="lab-label sm">Be honest: what's behind this insight?</span>
+              <div class="choices" id="evidenceChoices">
+                <button data-ev="1">A cross-tab or benchmark</button>
+                <button data-ev="1b">A regression / controlled comparison</button>
+                <button data-ev="2">A tested causal model or experiment</button>
+                <button data-ev="0">One case or anecdote</button>
+                <button data-ev="x">I don't know</button>
+              </div>
+              <p class="feedback" id="evidenceFeedback"></p>
+            </div>
+            <div class="lab-actions"><button class="lab-ghost" id="labBack">← Edit insight</button><button class="lab-primary push-right" id="labToQs" disabled>Start the challenge →</button></div>
+          </div>
+
+          <!-- Stage 2: question-by-question -->
+          <div class="lab-stage" id="labQuestions" hidden>
+            <div class="lab-quote small" id="labQuote2"></div>
+            <div class="lab-stepper" id="labStepper"></div>
+            <div id="labQCard"></div>
+            <div class="lab-actions">
+              <button class="lab-ghost" id="labPrev">← Back</button>
+              <button class="lab-ghost" id="labSkip">Can't answer yet</button>
+              <button class="lab-primary push-right" id="labNext">Next →</button>
+            </div>
+          </div>
+
+          <!-- Stage 3: result -->
+          <div class="lab-stage" id="labResult" hidden>
+            <div class="result-head">
+              <div class="result-score"><span id="resScore">0</span><small>/ 7</small></div>
+              <div><span class="lab-label sm">Causal readiness</span><h3 id="resVerdict" style="margin:2px 0 4px"></h3><p id="resVerdictWhy" style="margin:0;color:var(--ink-2)"></p></div>
+            </div>
+            <div class="result-grid" id="resGrid"></div>
+            <h4 class="mt">Your rewrite, assembled from your answers</h4>
+            <p class="source" style="text-transform:none;letter-spacing:0;font-weight:500">Association → mechanism → condition → a test the client can run. Edit it freely.</p>
+            <textarea id="resRewrite" class="lab-input" rows="5"></textarea>
+            <div class="ba mt">
+              <div class="card was"><h4>Original</h4><p id="resOriginal" style="margin:0"></p></div>
+              <div class="card now"><h4>Suggested verb</h4><p id="resVerb" style="margin:0"></p></div>
+            </div>
+            <div class="lab-actions">
+              <button class="lab-ghost" id="labRestart">Challenge another insight</button>
+              <button class="lab-ghost" id="labCopy">Copy summary</button>
+              <button class="lab-primary push-right" id="labSave">Save to my log</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lab-log mt" id="labLogWrap" hidden>
+          <h3>Your challenged insights</h3>
+          <p class="source" style="text-transform:none;letter-spacing:0;font-weight:500">Saved only in this browser.</p>
+          <div class="stack" id="labLog"></div>
+        </div>
+        <div class="module-foot"><button class="complete-btn" data-complete="lab" aria-pressed="false">Mark module complete</button><a class="next-link" href="#m10">Next: Say it in the room →</a></div>
+      </div>
+    </section>
+
+    <!-- M10 -->
+    <section class="module" id="m10" data-module>
+      <div class="inner">
+        <span class="eyebrow">Module 10 · Delivery</span>
+        <h2>Explain it in 30 seconds; take a challenge well</h2>
+        <div class="grid g2 mt">
+          <div class="card">
+            <p style="color:var(--ink-2)">Veena, prepping for the council: “If you were to describe in layman's terms… how would you describe that so that people understand how you're getting to where you're getting?”</p>
+            <blockquote>“The first thing you do as a human is you understand what makes things true. The second thing you do is you say, all right, what breaks them? That's what this is.”<span class="cite">— Mike Carroll, COO Council</span></blockquote>
+            <p style="margin-top:14px;font-size:.92rem;color:var(--ink-2)">Then the structure: the outcome sits in the middle; causes and preventive actions above; the symptoms you'd observe below; a mirror-image model for success.</p>
+          </div>
+          <div class="card"><h4>When the room challenges a finding</h4>
+            <ol class="steps">
+              <li><div><b>Acknowledge</b><span>Say the alternative explanation out loud.</span></div></li>
+              <li><div><b>Show the check</b><span>Say what you tested — e.g., recall counts, not just units.</span></div></li>
+              <li><div><b>Restate the mechanism</b><span>What you believe is happening, and why.</span></div></li>
+              <li><div><b>Say what would change your mind</b><span>Offer to dig: “I'll take these questions and run them through.”</span></div></li>
+            </ol></div>
+        </div>
+
+        <h3 class="mt">How causal thinking differentiates our message</h3>
+        <div class="compare">
+          <div class="row"><span class="hdr">The usual message</span><i></i><span class="hdr">The LNS message</span></div>
+          <div class="row"><span class="u">“91% have adopted or plan to adopt AI.”</span><i>→</i><span class="l">Adoption is universal, so it can't explain who wins. Here's what the top 15% do with it.</span></div>
+          <div class="row"><span class="u">“Leaders do more across more swim lanes.”</span><i>→</i><span class="l">Discipline lets leaders scale each deployment; breadth follows.</span></div>
+          <div class="row"><span class="u">“Best practice: push decisions down.”</span><i>→</i><span class="l">Push decisions down — once expertise and decision rights are defined.</span></div>
+          <div class="row"><span class="u">“Get OEE to world class.”</span><i>→</i><span class="l">Past parity, OEE stops paying. Agility is where margin moves.</span></div>
+          <div class="row"><span class="u">“Here's how you benchmark.”</span><i>→</i><span class="l">Here's what to stop doing, and what breaks if you do.</span></div>
+        </div>
+        <div class="takeaway">Why CDI is built on causal models: causes plus conditions are what let a third-party insight travel into one company's context.</div>
+
+        <h3 class="mt">Ask better questions</h3>
+        <blockquote class="big">“Why is this true? What part do we play in it? And if we stop playing that part, what else becomes true?”<span class="cite">— Mike Carroll</span></blockquote>
+        <ul class="commit mt">
+          <li>Name the rung before you choose the verb.</li>
+          <li>Separate the surface effect from the cause.</li>
+          <li>Every study reports one thing we were wrong about.</li>
+        </ul>
+        <div class="module-foot"><button class="complete-btn" data-complete="m10" aria-pressed="false">Mark module complete</button><a class="next-link" href="#sources">Sources ↓</a></div>
+      </div>
+    </section>
+
+    <section class="module sources" id="sources">
+      <div class="inner">
+        <span class="eyebrow">Sources</span>
+        <div class="grid g2">
+          <div><h4>Otter.ai transcripts, fall 2026 events and council meetings</h4>
+            <ul>
+              <li>OpEx roundtable: AI-powered autonomy, stabilize-standardize-sustain OpEx</li>
+              <li>Knowledge management roundtable: explicit, tacit and implicit knowledge</li>
+              <li>CQO roundtable: quality data architecture</li>
+              <li>COO Council meeting: culture research recap and M&amp;A preview</li>
+              <li>Matt Littlefield's COO session: industrial productivity and the AI productivity disconnect</li>
+              <li>CEO Council strategy meeting: board preview and productivity research preview</li>
+              <li>M&amp;A content prep call</li>
+            </ul></div>
+          <div><h4>Framework</h4>
+            <ul><li>Judea Pearl and Dana Mackenzie, <i>The Book of Why: The New Science of Cause and Effect</i> (Basic Books, 2018)</li></ul>
+            <h4>Notes on use</h4>
+            <ul>
+              <li>Quotes are lightly edited to correct transcription errors; meaning is unchanged.</li>
+              <li>External participants are described by role, not name (Chatham House / safe harbor).</li>
+              <li>Statistics are as stated in the sessions; check against the source research before reusing them in client work.</li>
+            </ul></div>
+        </div>
+      </div>
+    </section>
+    <footer class="site">LNS Research · Internal analyst training · Built from “Causal Thinking for Analysts — Training Deck v2”</footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
