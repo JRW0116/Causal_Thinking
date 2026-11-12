@@ -1,4 +1,4 @@
-/* Causal Thinking for Analysts — inquiry-led shell
+/* Causal Thinking Lab — inquiry-led shell
    Routes: #/  ·  #/q/<question>  ·  #/case/<id>  ·  #/idea/<id>  ·  #/ideas  ·  #/journal  ·  #/lab  ·  #/about */
 (function () {
   "use strict";

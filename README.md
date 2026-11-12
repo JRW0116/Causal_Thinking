@@ -1,4 +1,4 @@
-# Causal Thinking for Analysts
+# Causal Thinking Lab
 
 A static, self-paced training site for LNS Research analysts, built from the
 *Causal Thinking for Analysts — Training Deck v2* and the stories in it from the
