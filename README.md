@@ -4,18 +4,23 @@ A static, self-paced training site for LNS Research analysts, built from the
 *Causal Thinking for Analysts — Training Deck v2* and the stories in it from the
 fall 2026 roundtables and council meetings.
 
-## Modules
-1. Why the "why" — what council members are actually asking for
-2. Pearl's Ladder of Causation
-3. Chains, forks, colliders
-4. Where our claims sit (with a rung quiz)
-5. The eight causal moves
-6. Coaching moments
-7. Stress-test exercise (notes + answer key)
-8. Seven questions before a number goes on a slide
-9. **Insight Challenge Lab** — paste an insight, see which rung its language claims,
-   then work through the seven questions and leave with a rewritten causal claim
-10. Say it in the room
+## How it works: inquiry first
+There is no syllabus to read. The learner starts from a question they are facing
+("Can I call this multiplier the lever?", "Someone pushed back on my number"),
+or types their own. Each question opens a path of **cases**: real moments from
+the fall 2026 sessions. In each case the learner commits to an answer before
+seeing what happened in the room. Concepts (Pearl's Ladder, confounders,
+colliders, surface effects, counterfactuals and others) **unlock** as cases
+reveal them, so the theory arrives when it's needed.
+
+- `#/` — question picker plus free-text "ask your own"
+- `#/q/<id>` — the path of cases for a question
+- `#/case/<id>` — commit, then reveal (what happened, why it matters, a better way to say it, what it raises)
+- `#/ideas` — map of uncovered and locked ideas
+- `#/journal` — every prediction next to what actually happened
+- `#/lab` — **Insight Challenge Lab**: paste your own insight and work it through seven causal questions
+
+Content lives in `assets/content.js` (questions, cases, concepts).
 
 ## Run locally
 No build step. Serve the folder with any static server:
