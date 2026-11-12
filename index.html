@@ -55,18 +55,21 @@
         <div class="inner wide">
           <span class="eyebrow">Causal thinking · learn it by asking</span>
           <h1>What are you trying to figure out?</h1>
-          <p class="lede">There's no syllabus to read first. Pick the question you're actually facing — or type your own. Each one opens real moments from this fall's roundtables and councils. You'll commit to an answer before you see what happened, and the ideas will show up when you need them.</p>
-          <form class="ask" id="askForm" autocomplete="off">
-            <label for="askInput" class="sr-only">Ask your own question</label>
-            <input id="askInput" placeholder="Ask your own, e.g. “Can I say AI improves quality?” or “a client says our sample is biased”">
-            <button type="submit">Ask</button>
-          </form>
-          <div id="askResults" class="ask-results" hidden></div>
+          <p class="lede">There's no syllabus to read first. Pick the question you're actually facing — or type your own below. Each one opens real moments from this fall's roundtables and councils. You'll commit to an answer before you see what happened, and the ideas will show up when you need them.</p>
+          <div class="qgrid mt" id="questionGrid"></div>
+          <div class="ask-wrap">
+            <span class="ask-label">Don't see your question? Ask it your way.</span>
+            <form class="ask" id="askForm" autocomplete="off">
+              <label for="askInput" class="sr-only">Ask your own question</label>
+              <input id="askInput" placeholder="e.g. “Can I say AI improves quality?” or “a client says our sample is biased”">
+              <button type="submit">Ask</button>
+            </form>
+            <div id="askResults" class="ask-results" hidden></div>
+          </div>
         </div>
       </header>
       <div class="module"><div class="inner wide">
-        <div class="qgrid" id="questionGrid"></div>
-        <div class="home-foot">
+        <div class="home-foot" style="margin-top:0">
           <div class="card lab-callout">
             <div><span class="eyebrow">Bring your own</span><h3>Have an insight you're about to present?</h3><p>Paste it into the lab. It reads the language, flags what a skeptical room will notice, and questions you until you can say why.</p></div>
             <a class="lab-primary" href="#/lab">Challenge an insight →</a>

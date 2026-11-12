@@ -19,7 +19,9 @@
 
 /* Home */
 .hero h1 { max-width: 18ch; }
-.ask { display: flex; gap: 8px; margin-top: 28px; max-width: 760px; }
+.ask-wrap { margin-top: 28px; }
+.ask-label { display: block; font-size: .9rem; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+.ask { display: flex; gap: 8px; max-width: 760px; }
 .ask input { flex: 1; min-width: 0; font: 1.05rem var(--sans); padding: 14px 18px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
 .ask input:focus { outline: none; border-color: var(--accent); }
 .ask button { border: 0; background: var(--accent); color: var(--surface); padding: 0 24px; border-radius: 99px; font-weight: 650; }
