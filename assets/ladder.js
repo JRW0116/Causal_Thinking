@@ -122,7 +122,7 @@ CT.CONCEPTS.ladder.body = `
   function placeHtml(pick, locked) {
     return `<div class="place" role="radiogroup" aria-label="Which rung is the claim speaking from?">
       <span class="place-q">Place the claim on Pearl's Ladder: which rung is it speaking from?</span>
-      <div class="place-opts">${[3, 2, 1].map((n) => `<button class="place-btn r${n}" data-rung="${n}" role="radio" aria-checked="${pick === n}" ${locked ? "disabled" : ""}><b>Rung ${n}</b> ${CT.RUNG_INFO[n].name}<small>${esc(CT.RUNG_INFO[n].q)}</small></button>`).join("")}</div></div>`;
+      <div class="place-opts">${[1, 2, 3].map((n) => `<button class="place-btn r${n}" data-rung="${n}" role="radio" aria-checked="${pick === n}" ${locked ? "disabled" : ""}><b>Rung ${n}</b> ${CT.RUNG_INFO[n].name}<small>${esc(CT.RUNG_INFO[n].q)}</small></button>`).join("")}</div></div>`;
   }
 
   /* Reveal block: where the claim and the evidence sit, and the climb */
@@ -184,7 +184,7 @@ CT.CONCEPTS.ladder.body = `
     const ids = Object.keys(CT.CASES);
     return `<a class="home-ladder" href="#/ladder">
       <span class="hl-title">Grounded in Pearl's Ladder of Causation</span>
-      ${[3, 2, 1].map((n) => `<span class="hl-rung l${n}"><b>Rung ${n} · ${CT.RUNG_INFO[n].name}</b><i>“${esc(CT.RUNG_INFO[n].q)}”</i><em>${ids.filter((id) => CT.RUNG[id] && CT.RUNG[id].c === n).length} claims</em></span>`).join("")}
+      ${[1, 2, 3].map((n) => `<span class="hl-rung l${n}"><b>Rung ${n} · ${CT.RUNG_INFO[n].name}</b><i>“${esc(CT.RUNG_INFO[n].q)}”</i><em>${ids.filter((id) => CT.RUNG[id] && CT.RUNG[id].c === n).length} claims</em></span>`).join("")}
       <span class="hl-go">Explore the ladder →</span></a>`;
   }
 
