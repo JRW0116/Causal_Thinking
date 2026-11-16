@@ -37,10 +37,10 @@ CT.CASES = {
   },
 
   "opex-88": {
-    title: "Enterprise-wide OpEx and the top performers: about 8×. Finish the sentence.",
+    title: "Enterprise-wide OpEx and the top performers: over 8× more likely. Finish the sentence.",
     source: "OpEx roundtable",
     scene: `<p>The finding, as presented:</p>
-      <blockquote>“Organizations that… [have] deployed across the enterprise are 8.8 times more likely to be a market shaping company… so this is the big lever.”</blockquote>
+      <blockquote>“Organizations that… [have] deployed across the enterprise are [over 8] times more likely to be a market shaping company… so this is the big lever.”</blockquote>
       <p>In the productivity research workbook: of companies with an enterprise-wide, stable OpEx program, <b>42%</b> are in the World's Most Productive top tier, against <b>5%</b> of companies with weak or partial programs.</p>`,
     ask: "What's the strongest thing you can honestly say next?",
     options: [
@@ -52,8 +52,8 @@ CT.CASES = {
     reveal: {
       happened: `<p>In the room it landed as “this is the big lever.” Elsewhere in the same session, Jim gave the mechanism: expert-dependent programs fall apart when the experts move on; systematized ones carry the gains forward. And a second one: <i>“If I can make the right decision faster than my competition… it's compounding over time.”</i></p>`,
       why: `<p>A multiplier says two things travel together. A mechanism says <b>why</b> — the middle link in a chain — and gives the client something to act on and test.</p>
-        <p><b>Check the number, and its direction.</b> The source table gives 42% ÷ 5% ≈ 8.4×, not 8.8×. (In the same data, 8.8× is the gap for systematic constraint diagnostics: 44% of companies consistently ahead of competitors vs 5% of those not leading.) And the session stated the finding both ways — “deployed across the enterprise … more likely to be a market shaping company” and “42% of market shaping enterprises have an enterprise-wide program.” Those are different conditional probabilities: the share of enterprise-wide programs that reach the top tier is not the share of top-tier companies that run one. Say the one the table actually computes.</p>`,
-      better: "Companies running an enterprise-wide, stable OpEx program are about 8× more likely than weak programs to be among the World's Most Productive (42% vs 5%). Our read on why: a program that lives in a few experts' heads resets when they leave; one built into the way work is done keeps compounding. Test: would your program survive its champion leaving?",
+        <p><b>Check the direction.</b> The session stated the finding both ways — “deployed across the enterprise … more likely to be a market shaping company” and “42% of market shaping enterprises have an enterprise-wide program.” Those are different conditional probabilities: the share of enterprise-wide programs that reach the top tier is not the share of top-tier companies that run one. Say the one the table actually computes.</p>`,
+      better: "Companies running an enterprise-wide, stable OpEx program are over 8× more likely than weak programs to be among the World's Most Productive (42% vs 5%). Our read on why: a program that lives in a few experts' heads resets when they leave; one built into the way work is done keeps compounding. Test: would your program survive its champion leaving?",
     },
     concepts: ["mechanism", "verbs"],
     next: ["data-platform", "swim-lanes"],
