@@ -244,3 +244,9 @@
   .place-btn { padding: 8px 10px; }
   .place-btn small { display: none; }
 }
+
+/* ---------- sharing ---------- */
+.crumb-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+.crumb-row .crumb, .crumb-row .eyebrow { margin-bottom: 0; }
+.share-btn { flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 99px; padding: 6px 14px; font-size: .82rem; font-weight: 600; }
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }

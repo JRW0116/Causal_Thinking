@@ -22,6 +22,23 @@
   };
   const store = CT.store;
 
+  /* ---------- sharing ---------- */
+  const SITE = "https://jrw0116.github.io/Causal_Thinking/";
+  CT.share = async function (hash, title) {
+    const url = SITE + (hash || "");
+    const text = title ? `${title}, from the Causal Thinking Lab` : "Causal Thinking Lab: say why, not just what";
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      try { await navigator.share({ title: "Causal Thinking Lab", text, url }); return; } catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(url); CT.toast("Link copied: " + url.replace("https://", "")); }
+    catch (e) { window.prompt("Copy this link:", url); }
+  };
+  const shareBtn = (hash, title) => `<button class="share-btn" data-share="${esc(hash)}" data-title="${esc(title)}" title="Copy a link to this page">↗ Share</button>`;
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-share]"); if (!b) return;
+    CT.share(b.dataset.share, b.dataset.title);
+  });
+
   const CASE_IDS = Object.keys(CT.CASES);
   let answers = store.get("answers", {});   // caseId -> {opt, text, at}
   let peeked = new Set(store.get("peeked", []));
@@ -45,6 +62,7 @@
   });
   const nav = $("#sidenav"), mt = $("#menuToggle");
   mt.addEventListener("click", () => { const o = nav.classList.toggle("open"); mt.setAttribute("aria-expanded", o); });
+  $("#shareSiteBtn").addEventListener("click", () => CT.share("", ""));
   $("#resetBtn").addEventListener("click", () => {
     if (!confirm("Clear your answers, uncovered ideas and saved insights in this browser?")) return;
     store.clear(); location.hash = "#/"; location.reload();
@@ -114,7 +132,7 @@
     const firstOpen = q.cases.find((c) => !answers[c]) || q.cases[0];
     const concepts = [...new Set(q.cases.flatMap((c) => CT.CASES[c].concepts))];
     const u = uncovered();
-    $("#questionBody").innerHTML = `<a class="crumb" href="#/">← All questions</a>
+    $("#questionBody").innerHTML = `<div class="crumb-row"><a class="crumb" href="#/">← All questions</a>${shareBtn("#/q/" + q.id, q.q)}</div>
       <span class="eyebrow">Your question</span><h2>${esc(q.q)}</h2>
       <p class="lede">Work through these moments from the room. Each asks you to commit before it shows what happened. Start anywhere.</p>
       <ol class="path mt">${q.cases.map((cid, i) => { const c = CT.CASES[cid]; const d = !!answers[cid];
@@ -131,7 +149,7 @@
     const back = fromQuestion ? CT.QUESTIONS.find((q) => q.id === fromQuestion) : questionsFor(id)[0];
     const pos = back ? back.cases.indexOf(id) : -1;
     $("#caseBody").innerHTML = `
-      <a class="crumb" href="${back ? "#/q/" + back.id : "#/"}">← ${back ? esc(back.q) : "All questions"}</a>
+      <div class="crumb-row"><a class="crumb" href="${back ? "#/q/" + back.id : "#/"}">← ${back ? esc(back.q) : "All questions"}</a>${shareBtn("#/case/" + id, c.title)}</div>
       <span class="eyebrow">${back && pos >= 0 ? `Case ${pos + 1} of ${back.cases.length} · ` : ""}${esc(c.source)}</span>
       <h2>${esc(c.title)}</h2>
       <div class="scene">${c.scene}</div>

@@ -157,7 +157,7 @@ CT.CONCEPTS.ladder.body = `
       return `<a class="next-card ${done ? "done" : ""}" href="#/case/${id}"><span class="source">${done ? "✓ Explored · " : ""}Evidence: ${evName(g.e)}${gap > 0 ? ` · ${gap}-rung gap` : ""}</span><b>${esc(CT.CASES[id].title)}</b></a>`; };
     const chips = (k) => conceptsAt(k).map((c) => `<a class="idea-chip on" href="#/idea/${c}">${esc(CT.CONCEPTS[c].name)}</a>`).join("");
     root.innerHTML = `
-      <span class="eyebrow">The spine of this program</span>
+      <div class="crumb-row"><span class="eyebrow">The spine of this program</span><button class="share-btn" data-share="#/ladder" data-title="Pearl's Ladder of Causation">↗ Share</button></div>
       <h2>Pearl's Ladder of Causation</h2>
       <p class="lede">Every case here is a claim someone made in the room, and every claim speaks from a rung. The skill is saying which rung, seeing which rung the evidence actually reaches, and knowing what it would take to climb the gap.</p>
       <div class="ladder-page mt">
