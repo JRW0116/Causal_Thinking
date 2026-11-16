@@ -49,3 +49,14 @@ and the Lab's off-lexicon check and related-construct suggestions.
 To refresh it (requires UKG database access over the SSH tunnel; run locally, never committed):
 1. `node ukg_export\export_ukg_lexicon.js` — raw export to a local folder outside this repo
 2. `py -I ukg_export\build_public_snapshot.py Causal_Thinking\assets\ukg-lexicon.js` — filtered public subset
+
+## Grounded in Pearl's Ladder of Causation
+The program is built on the three rungs from Judea Pearl and Dana Mackenzie's *The Book of Why*
+(seeing / association, doing / intervention, imagining / counterfactuals). `assets/ladder.js` tags
+every case with the rung its claim speaks from and the rung its evidence reaches, plus "the climb":
+what it would take to earn the claim. Learners place each claim on the ladder before the reveal;
+the reveal shows claim, evidence and their placement on a mini-ladder. `#/ladder` lists every claim
+by rung, and the ideas map is grouped by where each idea lives on the ladder.
+
+Cases live in `assets/content.js` (deck stories) and `assets/cases-2.js` (KM roundtable,
+OpEx roundtable and the Industrial AI Insights session prep call).

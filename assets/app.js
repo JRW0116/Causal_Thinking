@@ -28,7 +28,7 @@
   let fromQuestion = null;                     // breadcrumb context
 
   const uncovered = () => {
-    const s = new Set();
+    const s = new Set(["ladder"]);  // the ladder is the frame: always open
     Object.keys(answers).forEach((id) => (CT.CASES[id]?.concepts || []).forEach((c) => s.add(c)));
     return s;
   };
@@ -62,6 +62,7 @@
   /* ---------- HOME ---------- */
   function caseStatus(id) { return answers[id] ? "done" : ""; }
   function renderHome() {
+    const lb = $("#ladderBand"); if (lb && CT.ladder) lb.innerHTML = CT.ladder.homeBand();
     $("#questionGrid").innerHTML = CT.QUESTIONS.map((q) => {
       const done = q.cases.filter((id) => answers[id]).length;
       return `<a class="qcard-home" href="#/q/${q.id}">
@@ -135,6 +136,7 @@
       <h2>${esc(c.title)}</h2>
       <div class="scene">${c.scene}</div>
       <div class="commit-panel ${a ? "locked" : ""}" id="commitPanel">
+        ${CT.ladder && CT.RUNG[id] ? CT.ladder.placeHtml(a ? a.rung : null, !!a) : ""}
         <div class="cp-head"><span class="cp-step">Your call</span><span class="cp-ask">${esc(c.ask)}</span></div>
         ${c.options ? `<div class="opts" role="radiogroup" aria-label="Your answer">${c.options.map((o, i) => `<button role="radio" aria-checked="false" data-i="${i}" class="opt"><span class="ol">${String.fromCharCode(65 + i)}</span><span>${esc(o.t)}</span></button>`).join("")}</div>` : ""}
         <label class="cp-free"><span>${esc(c.free || "Your reasoning")}${c.options ? " <i>(optional, but it's where the learning is)</i>" : ""}</span>
@@ -144,7 +146,11 @@
       </div>
       <div id="revealWrap"></div>`;
 
-    let sel = a ? a.opt : null;
+    let sel = a ? a.opt : null, rung = a ? a.rung : null;
+    $$(".place-btn").forEach((b) => b.addEventListener("click", () => {
+      if (answers[id]) return; rung = +b.dataset.rung;
+      $$(".place-btn").forEach((x) => x.setAttribute("aria-checked", x === b));
+    }));
     const btn = $("#commitBtn"), ta = $("#caseText");
     const ready = () => { btn.disabled = c.options ? sel == null : ta.value.trim().length < 15; };
     $$(".opt").forEach((b) => b.addEventListener("click", () => {
@@ -154,7 +160,7 @@
     ta.addEventListener("input", ready);
     btn.addEventListener("click", () => {
       const before = uncovered();
-      answers[id] = { opt: sel, text: ta.value.trim(), at: Date.now() };
+      answers[id] = { opt: sel, text: ta.value.trim(), rung, at: Date.now() };
       store.set("answers", answers);
       const fresh = c.concepts.filter((k) => !before.has(k));
       showReveal(id, fresh, true); renderProgress();
@@ -189,7 +195,9 @@
     }
     const u = uncovered();
     const nexts = c.next.filter((n) => CT.CASES[n]);
+    $$(".place-btn").forEach((b) => { b.disabled = true; });
     $("#revealWrap").innerHTML = `<div class="reveal ${animate ? "anim" : ""}">
+      ${CT.ladder ? CT.ladder.revealHtml(id, a.rung) : ""}
       <div class="rv-block"><span class="rv-label">What happened</span>${c.reveal.happened}</div>
       <div class="rv-block"><span class="rv-label">Why it matters</span>${c.reveal.why}</div>
       ${c.reveal.better ? `<div class="better"><b>A better way to say it:</b> “${esc(c.reveal.better)}”</div>` : ""}
@@ -230,7 +238,7 @@
 
   function renderIdeas() {
     const u = uncovered();
-    $("#ideasGrid").innerHTML = CT.CONCEPT_ORDER.map((k) => {
+    const card = (k) => {
       const c = CT.CONCEPTS[k], on = u.has(k), pk = peeked.has(k) && !on;
       const via = casesFor(k)[0];
       return `<a class="idea-card ${on ? "on" : pk ? "peek" : "locked"}" href="#/idea/${k}">
@@ -238,12 +246,21 @@
         <b>${on || pk ? esc(c.name) : "?"}</b>
         <span>${on || pk ? esc(c.one) : "Uncover it through: " + esc(CT.CASES[via].title)}</span>
         ${pk ? '<em class="peek-note">Peeked — not yet earned through a case</em>' : ""}</a>`;
+    };
+    const bands = CT.RUNG_BANDS || [{ key: null, title: "", sub: "" }];
+    $("#ideasGrid").innerHTML = bands.map((b) => {
+      const ks = CT.CONCEPT_ORDER.filter((k) => b.key == null || (CT.CONCEPT_RUNG || {})[k] === b.key);
+      if (!ks.length) return "";
+      return `<section class="idea-band"><h3>${esc(b.title)}</h3><p class="source" style="text-transform:none;letter-spacing:0">${esc(b.sub)}</p><div class="ideas-grid">${ks.map(card).join("")}</div></section>`;
     }).join("");
   }
 
   /* ---------- JOURNAL ---------- */
   function renderJournal() {
     const ids = Object.keys(answers).sort((x, y) => answers[y].at - answers[x].at);
+    const placed = ids.filter((i) => answers[i].rung && CT.RUNG[i]);
+    const right = placed.filter((i) => answers[i].rung === CT.RUNG[i].c).length;
+    const jsum = $("#journalSummary"); if (jsum) jsum.textContent = placed.length ? `Ladder placement: ${right} of ${placed.length} claims put on the right rung.` : "";
     if (!ids.length) { $("#journalList").innerHTML = `<div class="card"><p style="margin:0">Nothing yet. <a href="#/">Pick a question</a> and commit to your first answer.</p></div>`; return; }
     $("#journalList").innerHTML = ids.map((id) => {
       const c = CT.CASES[id], a = answers[id]; const o = c.options && a.opt != null ? c.options[a.opt] : null;
@@ -252,6 +269,7 @@
         ${o ? `<div class="j-row"><span>You said</span><p class="${o.best ? "hit" : "miss"}">${esc(o.t)}</p></div>` : ""}
         ${a.text ? `<div class="j-row"><span>Your reasoning</span><p>${esc(a.text)}</p></div>` : ""}
         ${best && !o?.best ? `<div class="j-row"><span>What happened</span><p>${esc(best.t)}</p></div>` : ""}
+        ${a.rung && CT.RUNG[id] ? `<div class="j-row"><span>On the ladder</span><p class="${a.rung === CT.RUNG[id].c ? "hit" : "miss"}">You placed it on Rung ${a.rung}; it speaks from Rung ${CT.RUNG[id].c}.</p></div>` : ""}
         <div class="j-row"><span>Ideas</span><p>${c.concepts.map((k) => esc(CT.CONCEPTS[k].name)).join(" · ")}</p></div></div>`;
     }).join("");
   }
@@ -278,6 +296,7 @@
     else if (p === "idea") { renderIdea(arg); show("concept"); }
     else if (p === "ideas") { renderIdeas(); show("ideas"); }
     else if (p === "journal") { renderJournal(); show("journal"); }
+    else if (p === "ladder") { if (CT.ladder) CT.ladder.renderLadder(answers); show("ladder"); }
     else if (p === "lexicon") { if (CT.renderLexicon) CT.renderLexicon(); show("lexicon"); }
     else if (p === "lab") { show("lab"); }
     else if (p === "about") { show("about"); }

@@ -25,15 +25,16 @@
     <a class="brand" href="#/" style="text-decoration:none;color:inherit"><small>LNS Research · Analyst training</small>Causal Thinking Lab</a>
 
     <div class="discover">
-      <div class="disc-row"><span>Ideas uncovered</span><b id="ideasCount">0 / 15</b></div>
+      <div class="disc-row"><span>Ideas uncovered</span><b id="ideasCount">0 / 16</b></div>
       <div class="progress-bar"><span id="ideasFill"></span></div>
-      <div class="disc-row" style="margin-top:10px"><span>Cases explored</span><b id="casesCount">0 / 19</b></div>
+      <div class="disc-row" style="margin-top:10px"><span>Cases explored</span><b id="casesCount">0 / 36</b></div>
       <div class="progress-bar"><span id="casesFill"></span></div>
     </div>
 
     <ol id="navList">
       <li><a href="#/" data-view="home"><span class="ico">?</span>Start with a question</a></li>
       <li><a href="#/lab" data-view="lab"><span class="ico">⚗</span>Challenge an insight</a></li>
+      <li><a href="#/ladder" data-view="ladder"><span class="ico">≡</span>Pearl's Ladder</a></li>
       <li><a href="#/ideas" data-view="ideas"><span class="ico">◇</span>Ideas you've uncovered</a></li>
       <li><a href="#/lexicon" data-view="lexicon"><span class="ico">Aa</span>Speak LNS</a></li>
       <li><a href="#/journal" data-view="journal"><span class="ico">✎</span>My thinking</a></li>
@@ -54,9 +55,10 @@
     <section class="view" id="view-home" data-view="home">
       <header class="hero">
         <div class="inner wide">
-          <span class="eyebrow">Causal thinking · learn it by asking</span>
+          <span class="eyebrow">Causal thinking · grounded in Pearl's Ladder of Causation</span>
           <h1>What are you trying to figure out?</h1>
-          <p class="lede">There's no syllabus to read first. Pick the question you're actually facing — or type your own below. Each one opens real moments from this fall's roundtables and councils. You'll commit to an answer before you see what happened, and the ideas will show up when you need them.</p>
+          <p class="lede">There's no syllabus to read first. Pick the question you're actually facing — or type your own below. Each one opens real moments from this fall's roundtables and councils. You'll commit to an answer before you see what happened, and the ideas will show up when you need them. Every claim sits on a rung of Judea Pearl's Ladder of Causation — seeing, doing, imagining — and part of each case is placing it there.</p>
+          <div id="ladderBand" class="mt"></div>
           <div class="qgrid mt" id="questionGrid"></div>
           <div class="ask-wrap">
             <span class="ask-label">Don't see your question? Ask it your way.</span>
@@ -99,9 +101,14 @@
       <div class="module"><div class="inner wide">
         <span class="eyebrow">Ideas you've uncovered</span>
         <h2>Your map of causal thinking</h2>
-        <p class="lede">Ideas unlock when a case reveals them. Locked ones show which question leads there — follow your curiosity, not the order.</p>
+        <p class="lede">Organized by where each idea lives on Pearl's Ladder. Ideas unlock when a case reveals them; locked ones show which case leads there.</p>
         <div class="ideas-grid mt" id="ideasGrid"></div>
       </div></div>
+    </section>
+
+    <!-- LADDER -->
+    <section class="view" id="view-ladder" data-view="ladder" hidden>
+      <div class="module"><div class="inner wide" id="ladderBody"></div></div>
     </section>
 
     <!-- LEXICON (UKG snapshot) -->
@@ -115,6 +122,7 @@
         <span class="eyebrow">My thinking</span>
         <h2>What you predicted, and what you learned</h2>
         <p class="lede">Every commitment you've made, next to what actually happened. Saved only in this browser.</p>
+        <p id="journalSummary" class="score"></p>
         <div class="lab-actions" style="margin-top:8px"><button class="lab-ghost" id="journalCopy">Copy my journal</button></div>
         <div class="stack mt" id="journalList"></div>
       </div></div>
@@ -261,6 +269,8 @@
   </main>
 </div>
 <script src="assets/content.js"></script>
+<script src="assets/cases-2.js"></script>
+<script src="assets/ladder.js"></script>
 <script src="assets/ukg-lexicon.js"></script>
 <script src="assets/ukg.js"></script>
 <script src="assets/app.js"></script>
