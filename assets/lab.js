@@ -27,7 +27,7 @@
   // Red-flag patterns tied to moves
   const FLAGS = [
     { id: "lever", re: /\b(so|therefore|which means|thus)\b.*\b(lever|key|should|must|will|drive|is how)\b|\bthe (big |key )?lever\b/i, t: "Rung jump", q: 1,
-      m: "A Rung 1 pattern followed by a Rung 2 conclusion (“so… the lever”). This is the drift from Module 6: the 8.8× OpEx line became “this is the big lever.”" },
+      m: "A Rung 1 pattern followed by a Rung 2 conclusion (“so… the lever”). At the OpEx roundtable, the enterprise-wide OpEx multiplier became “this is the big lever.”" },
     { id: "juxt", re: /\d.*\b(but|yet|while|whereas)\b.*\d/i, t: "Juxtaposition", q: 3,
       m: "Two numbers side by side read as cause and effect. Matt's 91%-adopted / 85%-less-productive pairing was restated by the room as “AI made us less efficient.”" },
     { id: "time", re: /\b(since|after|following|post-|before)\b/i, t: "Timing ≠ cause", q: 7,

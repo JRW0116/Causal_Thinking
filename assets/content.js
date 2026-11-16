@@ -37,21 +37,23 @@ CT.CASES = {
   },
 
   "opex-88": {
-    title: "Market shapers are 8.8× more likely to run OpEx enterprise-wide. Finish the sentence.",
+    title: "Enterprise-wide OpEx and the top performers: about 8×. Finish the sentence.",
     source: "OpEx roundtable",
     scene: `<p>The finding, as presented:</p>
-      <blockquote>“Organizations that… [have] deployed across the enterprise are 8.8 times more likely to be a market shaping company… so this is the big lever.”</blockquote>`,
+      <blockquote>“Organizations that… [have] deployed across the enterprise are 8.8 times more likely to be a market shaping company… so this is the big lever.”</blockquote>
+      <p>In the productivity research workbook: of companies with an enterprise-wide, stable OpEx program, <b>42%</b> are in the World's Most Productive top tier, against <b>5%</b> of companies with weak or partial programs.</p>`,
     ask: "What's the strongest thing you can honestly say next?",
     options: [
-      { t: "“So enterprise-wide OpEx is the big lever.”", fb: "That's how it was said. “The lever” is a Rung 2 claim; an 8.8× cross-tab is Rung 1." },
+      { t: "“So enterprise-wide OpEx is the big lever.”", fb: "That's how it was said. “The lever” is a Rung 2 claim; a 42%-vs-5% cross-tab is Rung 1." },
       { t: "“…because a program in a few experts' heads resets when they leave; one built into the work keeps compounding.”", fb: "Yes — a mechanism. It tells the client why, and what to check.", best: true },
       { t: "“So shapers should be benchmarked on OpEx coverage.”", fb: "A benchmark tells them where they stand, not what to change." },
     ],
-    free: "Write your own “because…” for the 8.8×.",
+    free: "Write your own “because…” for the gap.",
     reveal: {
       happened: `<p>In the room it landed as “this is the big lever.” Elsewhere in the same session, Jim gave the mechanism: expert-dependent programs fall apart when the experts move on; systematized ones carry the gains forward. And a second one: <i>“If I can make the right decision faster than my competition… it's compounding over time.”</i></p>`,
-      why: `<p>A multiplier says two things travel together. A mechanism says <b>why</b> — the middle link in a chain — and gives the client something to act on and test.</p>`,
-      better: "Market shapers are 8.8× more likely to run OpEx enterprise-wide. Our read on why: a program that lives in a few experts' heads resets when they leave; one built into the way work is done keeps compounding. Test: would your program survive its champion leaving?",
+      why: `<p>A multiplier says two things travel together. A mechanism says <b>why</b> — the middle link in a chain — and gives the client something to act on and test.</p>
+        <p><b>Check the number, and its direction.</b> The source table gives 42% ÷ 5% ≈ 8.4×, not 8.8×. (In the same data, 8.8× is the gap for systematic constraint diagnostics: 44% of companies consistently ahead of competitors vs 5% of those not leading.) And the session stated the finding both ways — “deployed across the enterprise … more likely to be a market shaping company” and “42% of market shaping enterprises have an enterprise-wide program.” Those are different conditional probabilities: the share of enterprise-wide programs that reach the top tier is not the share of top-tier companies that run one. Say the one the table actually computes.</p>`,
+      better: "Companies running an enterprise-wide, stable OpEx program are about 8× more likely than weak programs to be among the World's Most Productive (42% vs 5%). Our read on why: a program that lives in a few experts' heads resets when they leave; one built into the way work is done keeps compounding. Test: would your program survive its champion leaving?",
     },
     concepts: ["mechanism", "verbs"],
     next: ["data-platform", "swim-lanes"],
@@ -385,7 +387,7 @@ CT.CONCEPTS = {
     body: `<div class="ladder">
       <div class="rung l3"><div class="label"><span class="n">Rung 3 · Imagining</span><span class="t">Counterfactuals</span></div><div><div class="q">“What if I had done X?” Was it X that caused Y?</div><div class="atlns"><b>At LNS:</b> “Would this deal have hit its targets if the thesis had been tested in diligence?”</div></div></div>
       <div class="rung l2"><div class="label"><span class="n">Rung 2 · Doing</span><span class="t">Intervention</span></div><div><div class="q">“What if I do X?” What happens to Y if we change X?</div><div class="atlns"><b>At LNS:</b> “If a client deploys OpEx enterprise-wide, will productivity compound?”</div></div></div>
-      <div class="rung l1"><div class="label"><span class="n">Rung 1 · Seeing</span><span class="t">Association</span></div><div><div class="q">“What if I see X?” How are X and Y related?</div><div class="atlns"><b>At LNS:</b> “Market shapers are 8.8× more likely to run OpEx enterprise-wide.” Cross-tabs and benchmarks live here.</div></div></div>
+      <div class="rung l1"><div class="label"><span class="n">Rung 1 · Seeing</span><span class="t">Association</span></div><div><div class="q">“What if I see X?” How are X and Y related?</div><div class="atlns"><b>At LNS:</b> “42% of enterprise-wide OpEx programs reach the World's Most Productive tier, vs 5% of weak ones.” Cross-tabs and benchmarks live here.</div></div></div>
     </div>
     <p class="mt">Pearl's central point: without an experiment, no amount of observational data answers a Rung 2 question on its own. Getting from seeing to doing takes a causal model — what causes what — written down so data can test it. Most of our survey statistics are Rung 1. Our clients decide on Rungs 2 and 3. The gap is where messaging goes wrong, or where it differentiates.</p>
     <p class="source">Adapted from Judea Pearl &amp; Dana Mackenzie, The Book of Why (2018)</p>` },
