@@ -162,6 +162,19 @@
     if (a) showReveal(id, [], false);
   }
 
+  // LNS terms used in this case, from the UKG lexicon snapshot
+  function lexBlock(c) {
+    if (!CT.lexicon) return "";
+    const text = [c.title, strip(c.scene), strip(c.reveal.happened), strip(c.reveal.why), c.reveal.better || ""].join(" ");
+    const curated = CT.lexicon.lookup((CT.CASE_LEX || {})[c.id || ""] || []);
+    const seen = new Set(curated.map((v) => v.t.toLowerCase()));
+    const terms = curated.concat(CT.lexicon.findTerms(text, 6).filter((v) => !seen.has(v.t.toLowerCase()))).slice(0, 6);
+    if (!terms.length) return "";
+    return `<div class="rv-block"><span class="rv-label">LNS terms in this case · from the UKG</span>
+      <div class="lex-inline">${terms.map(CT.lexicon.termChip).join("")}</div>
+      <p class="rv-one"><a href="#/lexicon">Browse the full LNS lexicon →</a></p></div>`;
+  }
+
   function showReveal(id, fresh, animate) {
     const c = CT.CASES[id], a = answers[id];
     const panel = $("#commitPanel"); panel.classList.add("locked");
@@ -183,6 +196,7 @@
       <div class="rv-block"><span class="rv-label">Ideas this case uncovered</span>
         <div class="chips-row">${c.concepts.map((k) => `<a class="idea-chip on ${fresh.includes(k) ? "fresh" : ""}" href="#/idea/${k}">◆ ${esc(CT.CONCEPTS[k].name)}${fresh.includes(k) ? ' <em>new</em>' : ""}</a>`).join("")}</div>
         <p class="rv-one">${c.concepts.map((k) => `<b>${esc(CT.CONCEPTS[k].name)}:</b> ${esc(CT.CONCEPTS[k].one)}`).join("<br>")}</p></div>
+      ${lexBlock(Object.assign({ id }, c))}
       <div class="rv-block"><span class="rv-label">This raises…</span>
         <div class="next-grid">${nexts.map((n) => `<a class="next-card ${answers[n] ? "done" : ""}" href="#/case/${n}"><span class="source">${answers[n] ? "✓ Explored · " : ""}${esc(CT.CASES[n].source)}</span><b>${esc(CT.CASES[n].title)}</b></a>`).join("")}
           <a class="next-card lab" href="#/lab"><span class="source">Insight Challenge Lab</span><b>Test one of your own findings the same way →</b></a></div></div>
@@ -264,6 +278,7 @@
     else if (p === "idea") { renderIdea(arg); show("concept"); }
     else if (p === "ideas") { renderIdeas(); show("ideas"); }
     else if (p === "journal") { renderJournal(); show("journal"); }
+    else if (p === "lexicon") { if (CT.renderLexicon) CT.renderLexicon(); show("lexicon"); }
     else if (p === "lab") { show("lab"); }
     else if (p === "about") { show("about"); }
     else { renderHome(); show("home"); }

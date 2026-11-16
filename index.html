@@ -35,6 +35,7 @@
       <li><a href="#/" data-view="home"><span class="ico">?</span>Start with a question</a></li>
       <li><a href="#/lab" data-view="lab"><span class="ico">⚗</span>Challenge an insight</a></li>
       <li><a href="#/ideas" data-view="ideas"><span class="ico">◇</span>Ideas you've uncovered</a></li>
+      <li><a href="#/lexicon" data-view="lexicon"><span class="ico">Aa</span>Speak LNS</a></li>
       <li><a href="#/journal" data-view="journal"><span class="ico">✎</span>My thinking</a></li>
       <li><a href="#/about" data-view="about"><span class="ico">i</span>About &amp; sources</a></li>
     </ol>
@@ -103,6 +104,11 @@
       </div></div>
     </section>
 
+    <!-- LEXICON (UKG snapshot) -->
+    <section class="view" id="view-lexicon" data-view="lexicon" hidden>
+      <div class="module"><div class="inner wide" id="lexiconBody"></div></div>
+    </section>
+
     <!-- JOURNAL -->
     <section class="view" id="view-journal" data-view="journal" hidden>
       <div class="module"><div class="inner">
@@ -152,6 +158,7 @@
               </div>
             </div>
             <div class="diag-flags" id="diagFlags"></div>
+            <div class="diag-lex" id="diagLexicon"></div>
             <div class="lab-q">
               <span class="lab-label sm">Be honest: what's behind this insight?</span>
               <div class="choices" id="evidenceChoices">
@@ -254,6 +261,8 @@
   </main>
 </div>
 <script src="assets/content.js"></script>
+<script src="assets/ukg-lexicon.js"></script>
+<script src="assets/ukg.js"></script>
 <script src="assets/app.js"></script>
 <script src="assets/lab.js"></script>
 </body>

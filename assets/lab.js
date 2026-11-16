@@ -129,6 +129,19 @@
   });
   $("#labBack").addEventListener("click", () => show("labIntake"));
 
+  // LNS language check, from the UKG lexicon snapshot
+  function renderLexicon() {
+    const box = $("#diagLexicon"); const X = window.CT.lexicon;
+    if (!box || !X) { if (box) box.innerHTML = ""; return; }
+    const av = X.avoidHits(L.text), terms = X.findTerms(L.text, 5), rel = X.relatedConstructs(L.text, 5);
+    if (!av.length && !terms.length && !rel.length) { box.innerHTML = ""; return; }
+    let h = `<h4>Speak LNS <span class="source" style="font-weight:500">· from the UKG lexicon</span></h4>`;
+    av.forEach((x) => { h += `<div class="flag"><span class="ft">⚑ Off-lexicon</span><span class="fm">“${esc(x.a)}” is a term LNS avoids. The ${esc(x.d.level.replace("_", " "))} is <b>${esc(x.d.t)}</b>. ${esc(x.d.voice.split(/(?<=\.)\s/)[0] || "")}</span></div>`; });
+    if (terms.length) h += `<div class="lex-inline"><span class="lab-label sm">LNS terms in your insight</span>${terms.map(X.termChip).join("")}</div>`;
+    if (rel.length) h += `<div class="lex-inline"><span class="lab-label sm">Constructs the UKG tracks that this touches</span><p class="lex-hint">Candidates for your mechanism, or for a confounder you should rule out.</p><div class="lex-constructs">${rel.map((c) => `<span>${esc(c.n)}</span>`).join("")}</div></div>`;
+    box.innerHTML = h;
+  }
+
   function renderDiagnosis() {
     $("#labQuote").innerHTML = highlight(L.text, L.hits) + (L.source ? `<span class="cite">— ${esc(L.source)}</span>` : "");
     $("#diagClaimed").textContent = RUNG_NAME[L.claimed];
@@ -143,6 +156,7 @@
     const fw = $("#diagFlags");
     fw.innerHTML = L.flags.length ? `<h4>What a skeptical room would notice</h4>` + L.flags.map((f) => `<div class="flag"><span class="ft">⚑ ${esc(f.t)}</span><span class="fm">${esc(f.m)}</span></div>`).join("")
       : `<div class="flag"><span class="ft" style="color:var(--good)">No obvious traps</span><span class="fm">The language looks careful. The seven questions will still find what the room would ask.</span></div>`;
+    renderLexicon();
     $$("#evidenceChoices button").forEach((b) => { b.classList.remove("right", "wrong"); b.setAttribute("aria-pressed", "false"); });
     $("#evidenceFeedback").classList.remove("show");
     $("#labToQs").disabled = true;

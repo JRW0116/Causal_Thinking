@@ -444,3 +444,26 @@ CT.CONCEPTS = {
 };
 
 CT.CONCEPT_ORDER = ["ladder", "verbs", "mechanism", "surface", "symptoms", "disconfirm", "variance", "conditions", "fork", "direction", "collider", "systems", "counterfactual", "juxtapose", "challenge"];
+
+/* LNS lexicon terms (from the UKG snapshot) curated per case. Looked up by name; missing terms are skipped. */
+CT.CASE_LEX = {
+  "ai-adoption": ["Industrial Productivity Index", "World's Most Productive Companies", "Pathfinder"],
+  "opex-88": ["Market Shaping Enterprises", "Operational Discipline", "Decision Latency"],
+  "data-platform": ["single source of truth", "Decision Intelligence", "Embedded Quality"],
+  "swim-lanes": ["5 Swim Lanes of Industrial Transformation (IX)", "Operational Discipline"],
+  "collaboration": ["Decision Intelligence", "Culture as the Operating System", "Collaboration DNA"],
+  "attrition": ["Culture as the Operating System", "culture change"],
+  "mna-execution": ["Closing the Gap from Intention to Action"],
+  "recalls": ["Embedded Quality", "Customer Experienced Quality"],
+  "high-tech": ["Industrial Productivity Index", "Pathfinder Companies"],
+  "regulated": ["Industrial Productivity Index"],
+  "knowledge-loss": ["Implicit and tacit knowledge", "greatest loss of knowledge in industrial history", "Frontline Knowledge Management"],
+  "oldest-plant": ["Connected Frontline Worker", "Implicit and tacit knowledge capture"],
+  "bottles": ["Connected Worker initiative", "Connected Frontline Worker"],
+  "curve-2015": ["Industrial Productivity Index", "Autonomous Operations"],
+  "amgen": ["Embedded Quality business case", "Embedded Quality"],
+  "deal-failure": ["Closing the Gap from Intention to Action"],
+  "utilization": ["Operational agility", "Agility"],
+  "customer-language": ["Digital Voice of the Customer", "Customer Experienced Quality"],
+  "explain": ["decision infrastructure", "Decision Intelligence"],
+};

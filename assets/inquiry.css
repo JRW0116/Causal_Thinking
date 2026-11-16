@@ -141,3 +141,40 @@
   .view > .module { padding-top: 64px; }
   #view-home > .module { padding-top: 8px; }
 }
+
+/* ---------- LNS lexicon (UKG snapshot) ---------- */
+.lex-meta { font-size: .82rem; color: var(--ink-3); }
+.lex-controls { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin: 4px 0 10px; }
+.lex-controls [hidden] { display: none; }
+.lex-count { font-size: .82rem; color: var(--ink-3); margin-bottom: 12px; }
+.lex-terms { margin: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.lex-terms > div { display: grid; grid-template-columns: 260px 1fr; gap: 18px; padding: 14px 18px; background: var(--surface); }
+.lex-terms dt { font: 600 1rem/1.35 var(--serif); }
+.lex-terms dd { margin: 0; font-size: .92rem; color: var(--ink-2); }
+.lex-terms dd .source { display: block; margin-top: 4px; text-transform: none; letter-spacing: 0; font-weight: 500; }
+.lex-type { display: block; font: 600 .68rem var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); margin-top: 3px; }
+.lex-terms mark, .lex-rule mark, .lex-constructs mark { background: var(--rung1-soft); color: inherit; border-radius: 3px; }
+.lex-rule h3 { margin: 8px 0 6px; }
+.lex-voice { margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: var(--accent-soft); font-size: .92rem; }
+.lex-pa { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; font-size: .82rem; font-weight: 600; }
+.lex-pa .ok { padding: 4px 10px; border-radius: 99px; background: var(--good-soft); color: var(--good); }
+.lex-pa .no { padding: 4px 10px; border-radius: 99px; background: var(--warn-soft); color: var(--warn); }
+.lex-constructs { display: flex; flex-wrap: wrap; gap: 6px; }
+.lex-constructs span { padding: 5px 10px; border-radius: 6px; background: var(--surface-2); font-size: .85rem; }
+.lex-inline { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; margin-top: 8px; }
+.lex-inline > .lab-label, .lex-inline > .lex-hint, .lex-inline > .lex-constructs { flex-basis: 100%; }
+.lex-hint { margin: 0; font-size: .85rem; color: var(--ink-3); }
+.lex-chip { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); font-size: .88rem; max-width: 100%; }
+.lex-chip summary { cursor: pointer; padding: 6px 12px; font-weight: 600; color: var(--accent); list-style: none; }
+.lex-chip summary::-webkit-details-marker { display: none; }
+.lex-chip summary::before { content: "Aa "; font-size: .72rem; color: var(--ink-3); }
+.lex-chip[open] { flex-basis: 100%; }
+.lex-chip > div { padding: 0 12px 10px; }
+.lex-chip p { margin: 0 0 4px; color: var(--ink-2); }
+.lex-chip .source { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.diag-lex { margin: 4px 0 16px; display: grid; gap: 8px; }
+.diag-lex h4 { margin: 0; }
+@media (max-width: 900px) {
+  .lex-controls { grid-template-columns: 1fr; }
+  .lex-terms > div { grid-template-columns: 1fr; gap: 4px; }
+}

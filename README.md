@@ -36,3 +36,16 @@ localStorage only.
 Quotes are lightly edited for transcription errors. External participants are
 described by role (Chatham House / safe harbor). Check statistics against the
 source research before reusing them in client work.
+
+## LNS lexicon (UKG snapshot)
+`assets/ukg-lexicon.js` is a **public subset** of the LNS Unified Knowledge Graph lexicon tables:
+vocabulary terms and definitions, discipline-level language rules (preferred and avoid-terms),
+and confirmed construct names. It contains no causal edges, weights, probabilities, survey links,
+company data or internal file paths.
+
+It powers the **Speak LNS** page (`#/lexicon`), the "LNS terms in this case" block on case reveals,
+and the Lab's off-lexicon check and related-construct suggestions.
+
+To refresh it (requires UKG database access over the SSH tunnel; run locally, never committed):
+1. `node ukg_export\export_ukg_lexicon.js` — raw export to a local folder outside this repo
+2. `py -I ukg_export\build_public_snapshot.py Causal_Thinking\assets\ukg-lexicon.js` — filtered public subset
