@@ -100,3 +100,28 @@
   .lab-actions .push-right { margin-left: 0; }
   .result-head { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---------- Lab front and center + Pearl's Ladder in the seven questions ---------- */
+.lab-hero { padding-bottom: 8px; }
+.lab-body { padding-top: 8px; }
+.seven-ladder { display: grid; grid-template-columns: 1fr 2fr 3fr 1fr; gap: 6px; margin-top: 20px; }
+.seven-ladder .sl { border-radius: 10px; padding: 10px 12px; font-size: .82rem; line-height: 1.35; }
+.seven-ladder .sl b { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
+.seven-ladder .sl span { color: var(--ink-2); }
+.lab-stepper { gap: 6px; align-items: flex-end; }
+.lab-stepper .sg { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.lab-stepper .sg-l { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 6px; border-radius: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lab-stepper .sg-b { display: flex; gap: 4px; }
+.qnum .pill { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 99px; font-size: .68rem; letter-spacing: .06em; vertical-align: 1px; }
+.pearl-note { border-radius: 8px; padding: 10px 14px; margin: 4px 0 12px; font-size: .9rem; line-height: 1.45; color: var(--ink); }
+.pearl-note.r12 { color: var(--ink); }
+.pearl-note b { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; opacity: .85; }
+.res-climb { margin: 18px 0 6px; }
+.res-climb .climb-bar { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 4px; margin: 6px 0; }
+.res-climb .climb-bar span { padding: 6px 8px; border-radius: 6px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; background: var(--surface-2); color: var(--ink-3); }
+.res-climb p { margin: 0; color: var(--ink-2); font-size: .92rem; }
+@media (max-width: 760px) {
+  .seven-ladder { grid-template-columns: 1fr 1fr; }
+  .lab-stepper .sg-l { font-size: 0; padding: 2px; height: 6px; }
+  .res-climb .climb-bar { grid-template-columns: 1fr 1fr; }
+}

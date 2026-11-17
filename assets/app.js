@@ -132,7 +132,7 @@
     const firstOpen = q.cases.find((c) => !answers[c]) || q.cases[0];
     const concepts = [...new Set(q.cases.flatMap((c) => CT.CASES[c].concepts))];
     const u = uncovered();
-    $("#questionBody").innerHTML = `<div class="crumb-row"><a class="crumb" href="#/">← All questions</a>${shareBtn("#/q/" + q.id, q.q)}</div>
+    $("#questionBody").innerHTML = `<div class="crumb-row"><a class="crumb" href="#/questions">← All questions</a>${shareBtn("#/q/" + q.id, q.q)}</div>
       <span class="eyebrow">Your question</span><h2>${esc(q.q)}</h2>
       <p class="lede">Work through these moments from the room. Each asks you to commit before it shows what happened. Start anywhere.</p>
       <ol class="path mt">${q.cases.map((cid, i) => { const c = CT.CASES[cid]; const d = !!answers[cid];
@@ -149,7 +149,7 @@
     const back = fromQuestion ? CT.QUESTIONS.find((q) => q.id === fromQuestion) : questionsFor(id)[0];
     const pos = back ? back.cases.indexOf(id) : -1;
     $("#caseBody").innerHTML = `
-      <div class="crumb-row"><a class="crumb" href="${back ? "#/q/" + back.id : "#/"}">← ${back ? esc(back.q) : "All questions"}</a>${shareBtn("#/case/" + id, c.title)}</div>
+      <div class="crumb-row"><a class="crumb" href="${back ? "#/q/" + back.id : "#/questions"}">← ${back ? esc(back.q) : "All questions"}</a>${shareBtn("#/case/" + id, c.title)}</div>
       <span class="eyebrow">${back && pos >= 0 ? `Case ${pos + 1} of ${back.cases.length} · ` : ""}${esc(c.source)}</span>
       <h2>${esc(c.title)}</h2>
       <div class="scene">${c.scene}</div>
@@ -279,7 +279,7 @@
     const placed = ids.filter((i) => answers[i].rung && CT.RUNG[i]);
     const right = placed.filter((i) => answers[i].rung === CT.RUNG[i].c).length;
     const jsum = $("#journalSummary"); if (jsum) jsum.textContent = placed.length ? `Ladder placement: ${right} of ${placed.length} claims put on the right rung.` : "";
-    if (!ids.length) { $("#journalList").innerHTML = `<div class="card"><p style="margin:0">Nothing yet. <a href="#/">Pick a question</a> and commit to your first answer.</p></div>`; return; }
+    if (!ids.length) { $("#journalList").innerHTML = `<div class="card"><p style="margin:0">Nothing yet. <a href="#/questions">Pick a question</a> and commit to your first answer.</p></div>`; return; }
     $("#journalList").innerHTML = ids.map((id) => {
       const c = CT.CASES[id], a = answers[id]; const o = c.options && a.opt != null ? c.options[a.opt] : null;
       const best = c.options ? c.options.find((x) => x.best) : null;
@@ -308,7 +308,8 @@
   function route() {
     const parts = (location.hash.replace(/^#\/?/, "") || "").split("/");
     const [p, arg] = parts;
-    if (!p) { fromQuestion = null; renderHome(); show("home"); }
+    if (!p || p === "lab") { show("lab"); }
+    else if (p === "questions") { fromQuestion = null; renderHome(); show("home"); }
     else if (p === "q") { renderQuestion(arg); show("question"); }
     else if (p === "case") { renderCase(arg); show("case"); }
     else if (p === "idea") { renderIdea(arg); show("concept"); }
@@ -316,7 +317,6 @@
     else if (p === "journal") { renderJournal(); show("journal"); }
     else if (p === "ladder") { if (CT.ladder) CT.ladder.renderLadder(answers); show("ladder"); }
     else if (p === "lexicon") { if (CT.renderLexicon) CT.renderLexicon(); show("lexicon"); }
-    else if (p === "lab") { show("lab"); }
     else if (p === "about") { show("about"); }
     else { renderHome(); show("home"); }
     renderProgress();

@@ -19,7 +19,7 @@
 <meta name="twitter:title" content="Causal Thinking Lab: say why, not just what">
 <meta name="twitter:description" content="Learn causal thinking by asking: real moments from LNS Research roundtables and councils, grounded in Pearl's Ladder of Causation. Commit to an answer, see what happened, and learn to say why, not just what.">
 <meta name="twitter:image" content="https://jrw0116.github.io/Causal_Thinking/assets/og-image.png">
-<meta name="description" content="An inquiry-led program for LNS Research analysts: start with your own question, commit to an answer, and uncover causal thinking through real moments from the fall 2026 sessions.">
+<meta name="description" content="Bring an insight and challenge it: seven questions walk your claim up Pearl's Ladder of Causation, from seeing to doing to imagining. Plus real moments from LNS Research's fall 2026 sessions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
@@ -47,8 +47,8 @@
     </div>
 
     <ol id="navList">
-      <li><a href="#/" data-view="home"><span class="ico">?</span>Start with a question</a></li>
-      <li><a href="#/lab" data-view="lab"><span class="ico">⚗</span>Challenge an insight</a></li>
+      <li><a href="#/" data-view="lab"><span class="ico">⚗</span>Challenge an insight</a></li>
+      <li><a href="#/questions" data-view="home"><span class="ico">?</span>Start with a question</a></li>
       <li><a href="#/ladder" data-view="ladder"><span class="ico">≡</span>Pearl's Ladder</a></li>
       <li><a href="#/ideas" data-view="ideas"><span class="ico">◇</span>Ideas you've uncovered</a></li>
       <li><a href="#/lexicon" data-view="lexicon"><span class="ico">Aa</span>Speak LNS</a></li>
@@ -146,10 +146,18 @@
 
     <!-- LAB -->
     <section class="view lab" id="view-lab" data-view="lab" hidden>
-      <div class="module" id="lab"><div class="inner">
-        <span class="eyebrow">Insight Challenge Lab</span>
-        <h2>Bring an insight. Leave with a causal claim.</h2>
-        <p class="lede">Paste something you, a client, or a vendor has presented as an insight. The lab reads its language, tells you which rung it is claiming, and then challenges you through seven questions — one at a time — before helping you rewrite it.</p>
+      <header class="hero lab-hero" id="lab"><div class="inner">
+        <span class="eyebrow">Insight Challenge Lab · grounded in Pearl's Ladder of Causation</span>
+        <h1>Bring an insight. Leave with a causal claim.</h1>
+        <p class="lede">Paste something you, a client, or a vendor has presented as an insight. The lab reads its language and tells you which rung of Pearl's Ladder it is claiming. Then seven questions walk it up the ladder, one at a time, before helping you rewrite it.</p>
+        <div class="seven-ladder" aria-label="The seven questions on Pearl's Ladder">
+          <div class="sl r1"><b>Rung 1 · Seeing</b><span>1 Variance</span></div>
+          <div class="sl r12"><b>The climb</b><span>2 Alternatives · 3 Direction</span></div>
+          <div class="sl r2"><b>Rung 2 · Doing</b><span>4 Mechanism · 5 Surface · 6 Conditions</span></div>
+          <div class="sl r3"><b>Rung 3 · Imagining</b><span>7 Counterfactual</span></div>
+        </div>
+      </div></header>
+      <div class="module lab-body"><div class="inner">
 <div class="card lab-shell mt">
           <!-- Stage 0: input -->
           <div class="lab-stage" id="labIntake">
@@ -215,6 +223,7 @@
               <div class="result-score"><span id="resScore">0</span><small>/ 7</small></div>
               <div><span class="lab-label sm">Causal readiness</span><h3 id="resVerdict" style="margin:2px 0 4px"></h3><p id="resVerdictWhy" style="margin:0;color:var(--ink-2)"></p></div>
             </div>
+            <div class="res-climb" id="resClimb"></div>
             <div class="result-grid" id="resGrid"></div>
             <h4 class="mt">Your rewrite, assembled from your answers</h4>
             <p class="source" style="text-transform:none;letter-spacing:0;font-weight:500">Association → mechanism → condition → a test the client can run. Edit it freely.</p>
@@ -237,10 +246,9 @@
           <div class="stack" id="labLog"></div>
         </div>
         
-        <div class="lab-log mt" id="labLogWrap" hidden>
-          <h3>Your challenged insights</h3>
-          <p class="source" style="text-transform:none;letter-spacing:0;font-weight:500">Saved only in this browser.</p>
-          <div class="stack" id="labLog"></div>
+        <div class="card lab-callout mt">
+          <div><span class="eyebrow">Learn from the room</span><h3>Want to see these questions in action first?</h3><p>36 real moments from this fall's roundtables and councils. Commit to an answer, then see what happened and where each claim sits on Pearl's Ladder.</p></div>
+          <a class="lab-primary" href="#/questions">Start with a question →</a>
         </div>
       </div></div>
     </section>

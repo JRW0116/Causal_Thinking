@@ -26,61 +26,78 @@
 
   // Red-flag patterns tied to moves
   const FLAGS = [
-    { id: "lever", re: /\b(so|therefore|which means|thus)\b.*\b(lever|key|should|must|will|drive|is how)\b|\bthe (big |key )?lever\b/i, t: "Rung jump", q: 1,
+    { id: "lever", re: /\b(so|therefore|which means|thus)\b.*\b(lever|key|should|must|will|drive|is how)\b|\bthe (big |key )?lever\b/i, t: "Rung jump", q: "mech",
       m: "A Rung 1 pattern followed by a Rung 2 conclusion (“so… the lever”). At the OpEx roundtable, the enterprise-wide OpEx multiplier became “this is the big lever.”" },
-    { id: "juxt", re: /\d.*\b(but|yet|while|whereas)\b.*\d/i, t: "Juxtaposition", q: 3,
+    { id: "juxt", re: /\d.*\b(but|yet|while|whereas)\b.*\d/i, t: "Juxtaposition", q: "alt",
       m: "Two numbers side by side read as cause and effect. Matt's 91%-adopted / 85%-less-productive pairing was restated by the room as “AI made us less efficient.”" },
-    { id: "time", re: /\b(since|after|following|post-|before)\b/i, t: "Timing ≠ cause", q: 7,
+    { id: "time", re: /\b(since|after|following|post-|before)\b/i, t: "Timing ≠ cause", q: "cf",
       m: "Before/after is not compared-to-what. The “curve bends after 2015” and “+14% since launch” claims both needed a do-nothing baseline." },
-    { id: "best", re: /\b(best practice|always|never|everyone should|proven)\b/i, t: "No conditions", q: 5,
+    { id: "best", re: /\b(best practice|always|never|everyone should|proven)\b/i, t: "No conditions", q: "cond",
       m: "A finding with no boundary conditions is a platitude. “Push decisions down” was “dead wrong” on its own — it held only with expertise, decision rights and guardrails." },
-    { id: "breadth", re: /\b(do more|more (initiatives|areas|swim lanes|collaboration|tools|programs)|across (multiple|more)|launch)\b/i, t: "Surface effect?", q: 2,
+    { id: "breadth", re: /\b(do more|more (initiatives|areas|swim lanes|collaboration|tools|programs)|across (multiple|more)|launch)\b/i, t: "Surface effect?", q: "surface",
       m: "Breadth is often the evidence a deeper cause leaves. “Leaders do more” was the surface; operational discipline was the cause." },
-    { id: "universal", re: /\b[89]\d%|\b(everybody|everyone|nearly all|most companies|universal|widely adopted)\b/i, t: "Low variance", q: 6,
+    { id: "universal", re: /\b[89]\d%|\b(everybody|everyone|nearly all|most companies|universal|widely adopted)\b/i, t: "Low variance", q: "var",
       m: "If nearly everyone does it, it can't explain who wins. M&A execution discipline mattered but didn't differentiate (gaps of 1–3 points)." },
-    { id: "measure", re: /\b(recall|incidents?|defects?|reported|detected|found|count)\b/i, t: "Measurement?", q: 3,
+    { id: "measure", re: /\b(recall|incidents?|defects?|reported|detected|found|count)\b/i, t: "Measurement?", q: "alt",
       m: "Could the measure itself have changed? “Is that because we're getting better at finding these, or changing the definition?” — CQO roundtable." },
-    { id: "survivor", re: /\b(oldest|survivor|still running|remaining|surviving|successful (companies|plants|deals))\b/i, t: "Selection", q: 3,
+    { id: "survivor", re: /\b(oldest|survivor|still running|remaining|surviving|successful (companies|plants|deals))\b/i, t: "Selection", q: "alt",
       m: "Ask what got a case into the sample. The oldest plant is in the story because it survived — a collider." },
   ];
 
+  /* The seven questions climb Pearl's Ladder: check the Rung 1 pattern, make the
+     climb (forks, colliders, direction), earn Rung 2 (chain, do(X), conditions),
+     then ask the Rung 3 counterfactual. */
+  const GROUPS = [
+    { g: "1", label: "Rung 1 · Seeing", cls: "r1" },
+    { g: "c", label: "The climb", cls: "r12" },
+    { g: "2", label: "Rung 2 · Doing", cls: "r2" },
+    { g: "3", label: "Rung 3 · Imagining", cls: "r3" },
+  ];
   const QUESTIONS = [
-    { k: "mech", short: "Mechanism", title: "Name the mechanism", move: "Move 1",
-      prompt: "Finish the sentence: this happens because…",
-      starter: "Because… (the chain from X to Y, in one sentence)",
-      story: "Jim at the OpEx roundtable: “If I can make the right decision faster than my competition… it's compounding over time.” Decision velocity is the because.",
-      push: "If your “because” just restates the correlation (“because leaders do it”), it isn't a mechanism yet." },
-    { k: "surface", short: "Surface", title: "Is it a surface effect?", move: "Move 2",
-      prompt: "If the client forced this up tomorrow and changed nothing else, would the outcome move? If it depends on something else being in place — what is that something?",
-      starter: "It would / wouldn't move, because it depends on…",
-      story: "“Leaders do more across swim lanes” was heard as “do more to succeed.” The cause was the operational discipline that lets each deployment scale.",
-      push: "If the answer is “only if…”, the thing after “if” is probably the real lever." },
-    { k: "alt", short: "Alternatives", title: "What else could produce this pattern?", move: "Move 6", chips: ["Growth rate", "Company size", "Industry mix", "Regulation", "Capital investment", "Measurement / definition change", "Selection / survivors", "Base effect"],
-      prompt: "Name at least one alternative explanation — and what you checked to rule it out.",
-      starter: "It could also be… We checked by…",
-      story: "High tech led productivity growth — but “if you're growing like a Foxconn, 50–60% a year,” you get leverage. The room supplied the confounder.",
-      push: "Get there first: name the alternative before the room does, and say what you checked." },
-    { k: "dir", short: "Direction", title: "Could the arrow run backward?", move: "Move 6", chips: ["Yes, plausibly", "Checked — it runs forward", "Both directions (a loop)", "Not sure"],
-      prompt: "Could the outcome be causing the thing you're crediting? How would you tell?",
-      starter: "The reverse would be… We can tell because…",
-      story: "We hypothesized knowledge loss forces adaptation. Our own data said the reverse: adaptability tracks optionality, and trapped companies adapt less.",
-      push: "Profitable firms can afford productivity programs. Successful companies talk more about customers. Check before you claim." },
-    { k: "cond", short: "Conditions", title: "When does it stop being true?", move: "Move 5",
-      prompt: "Complete: “This holds when… but not when…”",
-      starter: "This holds when… but not when…",
-      story: "Customer-focused language went with ~3.4× equity performance — except where customers have no choice, as with utilities.",
-      push: "Conditions are what let an insight travel into one client's context — Matt's “adjacency problem.”" },
-    { k: "var", short: "Variance", title: "Does it differentiate, or is it table stakes?", move: "Move 4", chips: ["Differentiates — leaders and followers differ a lot", "Table stakes — nearly everyone does it", "Don't know the spread"],
+    { k: "var", g: "1", short: "Variance", title: "Does it differentiate, or is it table stakes?", move: "Move 4", chips: ["Differentiates — leaders and followers differ a lot", "Table stakes — nearly everyone does it", "Don't know the spread"],
+      pearl: "Rung 1 is P(Y | X): what goes with what. Before you climb, make sure there is a pattern worth explaining. If nearly everyone does X, X can't explain who wins.",
       prompt: "How much does this vary between leaders and followers? If nearly everyone does it, what actually separates them?",
       starter: "The spread is… What actually separates them is…",
       story: "Everyone runs a disciplined M&A integration playbook; leader–follower gaps were 1–3 points. The differentiator sat upstream, in diligence.",
       push: "Say both halves: “It matters, it's just not differentiating.”" },
-    { k: "cf", short: "Counterfactual", title: "Compared to what?", move: "Move 8",
+    { k: "alt", g: "c", short: "Alternatives", title: "What else could produce this pattern?", move: "Move 6", chips: ["Growth rate", "Company size", "Industry mix", "Regulation", "Capital investment", "Measurement / definition change", "Selection / survivors", "Base effect"],
+      pearl: "Data alone can't climb. A third factor that drives both X and Y is a fork (a confounder); Pearl's back-door test asks what you must hold constant to close it. A sample filtered on success is a collider, and it manufactures patterns.",
+      prompt: "Name at least one alternative explanation — and what you checked to rule it out.",
+      starter: "It could also be… We checked by…",
+      story: "High tech led productivity growth — but “if you're growing like a Foxconn, 50–60% a year,” you get leverage. The room supplied the confounder.",
+      push: "Get there first: name the alternative before the room does, and say what you checked." },
+    { k: "dir", g: "c", short: "Direction", title: "Could the arrow run backward?", move: "Move 6", chips: ["Yes, plausibly", "Checked — it runs forward", "Both directions (a loop)", "Not sure"],
+      pearl: "An association is symmetric: the data look the same whichever way the arrow points. Direction is something you bring to the data, so it is something you have to defend.",
+      prompt: "Could the outcome be causing the thing you're crediting? How would you tell?",
+      starter: "The reverse would be… We can tell because…",
+      story: "We hypothesized knowledge loss forces adaptation. Our own data said the reverse: adaptability tracks optionality, and trapped companies adapt less.",
+      push: "Profitable firms can afford productivity programs. Successful companies talk more about customers. Check before you claim." },
+    { k: "mech", g: "2", short: "Mechanism", title: "Name the mechanism", move: "Move 1",
+      pearl: "Draw the chain X → M → Y. Pearl's point: a causal model, not more data, is what gets you to Rung 2. The mediator M is your “because.”",
+      prompt: "Finish the sentence: this happens because…",
+      starter: "Because… (the chain from X to Y, in one sentence)",
+      story: "Jim at the OpEx roundtable: “If I can make the right decision faster than my competition… it's compounding over time.” Decision velocity is the because.",
+      push: "If your “because” just restates the correlation (“because leaders do it”), it isn't a mechanism yet." },
+    { k: "surface", g: "2", short: "Surface", title: "Is it a surface effect?", move: "Move 2",
+      pearl: "This is the do-question: P(Y | do(X)), not P(Y | X). If forcing X up wouldn't move Y, X is a surface effect — a sibling of the real cause in a fork, not the cause.",
+      prompt: "If the client forced this up tomorrow and changed nothing else, would the outcome move? If it depends on something else being in place — what is that something?",
+      starter: "It would / wouldn't move, because it depends on…",
+      story: "“Leaders do more across swim lanes” was heard as “do more to succeed.” The cause was the operational discipline that lets each deployment scale.",
+      push: "If the answer is “only if…”, the thing after “if” is probably the real lever." },
+    { k: "cond", g: "2", short: "Conditions", title: "When does it stop being true?", move: "Move 5",
+      pearl: "The effect of do(X) depends on context. Pearl calls carrying a causal finding into a new setting transportability: name the conditions that switch the arrow on or off.",
+      prompt: "Complete: “This holds when… but not when…”",
+      starter: "This holds when… but not when…",
+      story: "Customer-focused language went with ~3.4× equity performance — except where customers have no choice, as with utilities.",
+      push: "Conditions are what let an insight travel into one client's context — Matt's “adjacency problem.”" },
+    { k: "cf", g: "3", short: "Counterfactual", title: "Compared to what?", move: "Move 8",
+      pearl: "Rung 3 asks about the road not taken: what would Y have been, for this company, had X not happened? A test the client runs (Rung 2) is the nearest practical evidence.",
       prompt: "What happens on the do-nothing path? What happens if you take it away? What test could the client run in their own organization?",
       starter: "Compared to… If removed… A client could test it by…",
       story: "Amgen measures cost of quality against a “do nothing” curve as volume scales — not against last year's spend. Mike: “Do you really know what happens when you take it away?”",
       push: "A test the client can run is what turns your claim into their decision." },
   ];
+  const groupOf = (q) => GROUPS.find((x) => x.g === q.g);
 
   const EVIDENCE = {
     "0": { r: 0, label: "One case or anecdote", txt: "A single case can't establish even a Rung 1 pattern. Treat it as a hypothesis worth testing." },
@@ -169,7 +186,7 @@
     $("#diagEvidenceWhy").textContent = ev.txt;
     const gap = L.claimed - Math.floor(ev.r === 1.5 ? 1 : ev.r);
     const fb = $("#evidenceFeedback");
-    if (gap > 0) fb.innerHTML = `<div class="gap"><b>Rung gap: the language claims ${RUNG_NAME[L.claimed]}, the evidence supports ${ev.r >= 1 ? "Rung " + Math.floor(ev.r) : "less than Rung 1"}.</b> That gap is where messaging goes wrong — or, closed honestly, where it differentiates. The next seven questions are how you close it.</div>`;
+    if (gap > 0) fb.innerHTML = `<div class="gap"><b>Rung gap: the language claims ${RUNG_NAME[L.claimed]}, the evidence supports ${ev.r >= 1 ? "Rung " + Math.floor(ev.r) : "less than Rung 1"}.</b> That gap is where messaging goes wrong — or, closed honestly, where it differentiates. The seven questions climb the ladder one rung at a time; that is how you close it.</div>`;
     else fb.innerHTML = `<div class="gap ok"><b>The language and the evidence are on the same rung.</b> Good. The seven questions will check whether it's ready to climb — and whether it's ready for a client.</div>`;
     fb.classList.add("show");
     $("#labToQs").disabled = false;
@@ -177,12 +194,14 @@
 
   $("#labToQs").addEventListener("click", () => { L.step = 0; show("labQuestions"); $("#labQuote2").innerHTML = highlight(L.text, L.hits); renderQ(); });
 
-  function flagsFor(qi) { return L.flags.filter((f) => f.q === qi + 1); }
+  function flagsFor(qi) { return L.flags.filter((f) => f.q === QUESTIONS[qi].k); }
 
   function renderStepper() {
-    $("#labStepper").innerHTML = QUESTIONS.map((q, i) => {
-      const r = L.rate[q.k]; const cls = [i === L.step ? "cur" : "", r ? "s-" + r : ""].join(" ");
-      return `<button class="${cls}" data-i="${i}" data-n="${i + 1}" title="${esc(q.title)}">${i + 1}. ${esc(q.short)}</button>`;
+    $("#labStepper").innerHTML = GROUPS.map((G) => {
+      const qs = QUESTIONS.map((q, i) => ({ q, i })).filter((x) => x.q.g === G.g);
+      return `<div class="sg sg-${G.g}" style="flex:${qs.length}"><span class="sg-l ${G.cls}">${esc(G.label)}</span><div class="sg-b">${qs.map(({ q, i }) => {
+        const r = L.rate[q.k]; const cls = [i === L.step ? "cur" : "", r ? "s-" + r : ""].join(" ");
+        return `<button class="${cls}" data-i="${i}" data-n="${i + 1}" title="${esc(q.title)}">${i + 1}. ${esc(q.short)}</button>`; }).join("")}</div></div>`;
     }).join("");
     $$("#labStepper button").forEach((b) => b.addEventListener("click", () => { saveAnswer(); L.step = +b.dataset.i; renderQ(); }));
   }
@@ -193,8 +212,9 @@
     const pushTxt = fl.length ? fl.map((f) => `<b>⚑ ${esc(f.t)} in your insight</b>${esc(f.m)}`).join("<br><br>") : `<b>Push yourself</b>${esc(q.push)}`;
     const chips = q.chips ? `<div class="chips">${q.chips.map((c) => `<button data-c="${esc(c)}" class="${(L.chips[q.k] || []).includes(c) ? "on" : ""}">${esc(c)}</button>`).join("")}</div>` : "";
     $("#labQCard").innerHTML = `<div class="qcard">
-      <span class="qnum">Question ${L.step + 1} of 7 · ${esc(q.move)}</span>
+      <span class="qnum">Question ${L.step + 1} of 7 <span class="pill ${groupOf(q).cls}">${esc(groupOf(q).label)}</span></span>
       <h3>${esc(q.title)}</h3>
+      <div class="pearl-note ${groupOf(q).cls}"><b>On Pearl's Ladder</b>${esc(q.pearl)}</div>
       <div class="qprompt">${esc(q.prompt)}</div>
       <div class="coach"><div class="story"><b>From the room</b>${esc(q.story)}</div><div class="push">${pushTxt}</div></div>
       <textarea class="lab-answer" id="qAnswer" placeholder="${esc(q.starter)}">${esc(L.ans[q.k] || "")}</textarea>
@@ -294,6 +314,19 @@
       const body = a || ch ? esc([ch, a].filter(Boolean).join(" — ")) : `<span class="todo">Open question — ${esc(q.prompt)}</span>`;
       return `<div class="res-item ${r}"><b>${esc(q.short)} · ${r === "solid" ? "solid" : r === "partial" ? "partial" : "open"}</b><p>${body}</p></div>`;
     }).join("");
+    let reached = 0;
+    for (const G of GROUPS) {
+      const ok = QUESTIONS.filter((q) => q.g === G.g).every((q) => L.rate[q.k] === "solid" || L.rate[q.k] === "partial");
+      if (!ok) break; reached++;
+    }
+    const climbTxt = ["Your reasoning hasn't secured Rung 1 yet: start by checking the pattern is real and differentiating.",
+      "Your reasoning secured Rung 1 (the pattern) but not the climb: forks, colliders and direction are still open.",
+      "You've made the climb, but Rung 2 isn't earned yet: name the chain, the do(X) test and the conditions.",
+      "Your reasoning reaches Rung 2. The counterfactual — compared to what — is the last step.",
+      "Your reasoning reaches Rung 3: pattern, climb, mechanism and counterfactual."][reached];
+    $("#resClimb").innerHTML = `<span class="lab-label sm">How far up Pearl's Ladder your reasoning climbed</span><div class="climb-bar">${GROUPS.map((G, i) =>
+      `<span class="${i < reached ? "on " + G.cls : ""}">${esc(G.label)}</span>`).join("")}</div><p>${esc(climbTxt)}</p>`;
+    L.result_reached = reached;
     const v = suggestedVerb(sc);
     $("#resRewrite").value = buildRewrite(v);
     $("#resOriginal").innerHTML = highlight(L.text, L.hits);
@@ -303,8 +336,8 @@
 
   $("#labRestart").addEventListener("click", () => { $("#insightInput").value = ""; $("#insightSource").value = ""; show("labIntake"); $("#insightInput").focus(); });
   function summary() {
-    const lines = [`ORIGINAL: ${L.text}${L.source ? " (" + L.source + ")" : ""}`, `CAUSAL READINESS: ${L.result.sc}/7 — ${L.result.verdict}`, `SUGGESTED VERB: ${L.result.verb}`, ""];
-    QUESTIONS.forEach((q) => lines.push(`${q.short.toUpperCase()} [${L.rate[q.k] || "open"}]: ${[(L.chips[q.k] || []).join(", "), L.ans[q.k]].filter(Boolean).join(" — ") || "—"}`));
+    const lines = [`ORIGINAL: ${L.text}${L.source ? " (" + L.source + ")" : ""}`, `CAUSAL READINESS: ${L.result.sc}/7 — ${L.result.verdict}`, `SUGGESTED VERB: ${L.result.verb}`, `LADDER: ${["below Rung 1", "Rung 1", "the climb", "Rung 2", "Rung 3"][L.result_reached || 0]}`, ""];
+    QUESTIONS.forEach((q) => lines.push(`${groupOf(q).label.toUpperCase()} · ${q.short.toUpperCase()} [${L.rate[q.k] || "open"}]: ${[(L.chips[q.k] || []).join(", "), L.ans[q.k]].filter(Boolean).join(" — ") || "—"}`));
     lines.push("", "REWRITE: " + $("#resRewrite").value);
     return lines.join("\n");
   }
