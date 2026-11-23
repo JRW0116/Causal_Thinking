@@ -60,3 +60,14 @@ by rung, and the ideas map is grouped by where each idea lives on the ladder.
 
 Cases live in `assets/content.js` (deck stories) and `assets/cases-2.js` (KM roundtable,
 OpEx roundtable and the Industrial AI Insights session prep call).
+
+## Cloudflare deployment
+
+Live at https://research-portfolio.sera-holt.workers.dev/causal-thinking/ — the `research-portfolio` Worker in the LNS Research Cloudflare account, serving the site as static assets under `/causal-thinking/` (the root redirects there).
+
+```
+py tools/build_cf.py        # stages index.html + assets/ into dist/causal-thinking/
+npx wrangler@4 deploy       # uses wrangler.jsonc; needs `wrangler login` with LNS Research access
+```
+
+GitHub Pages (jrw0116.github.io/Causal_Thinking) still serves the same files; share links and preview tags point at the Cloudflare URL.
