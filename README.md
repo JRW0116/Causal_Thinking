@@ -63,10 +63,10 @@ OpEx roundtable and the Industrial AI Insights session prep call).
 
 ## Cloudflare deployment
 
-Live at https://research-portfolio.sera-holt.workers.dev/causal-thinking/ — the `research-portfolio` Worker in the LNS Research Cloudflare account, serving the site as static assets under `/causal-thinking/` (the root redirects there).
+Live at https://causal-thinking-lab.sera-holt.workers.dev/ — the `causal-thinking-lab` Worker in the LNS Research Cloudflare account, serving the site as static assets.
 
 ```
-py tools/build_cf.py        # stages index.html + assets/ into dist/causal-thinking/
+py tools/build_cf.py        # stages index.html + assets/ into dist/
 npx wrangler@4 deploy       # uses wrangler.jsonc; needs `wrangler login` with LNS Research access
 ```
 

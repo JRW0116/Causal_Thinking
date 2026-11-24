@@ -1,9 +1,9 @@
 // Cloudflare Worker (LNS Research account) serving the Causal Thinking Lab as static assets.
 // Build first:  py tools/build_cf.py   then:  npx wrangler@4 deploy
 {
-  "name": "research-portfolio",
+  "name": "causal-thinking-lab",
   "account_id": "e52d55bb864afe585ff5026bd9548133",
-  "compatibility_date": "2026-11-20",
+  "compatibility_date": "2026-11-23",
   "workers_dev": true,
   "preview_urls": false,
   "assets": { "directory": "./dist", "html_handling": "auto-trailing-slash", "not_found_handling": "none" },
