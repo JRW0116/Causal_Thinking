@@ -63,7 +63,7 @@ OpEx roundtable and the Industrial AI Insights session prep call).
 
 ## Cloudflare deployment
 
-Live at https://causal-thinking-lab.sera-holt.workers.dev/ — the `causal-thinking-lab` Worker in the LNS Research Cloudflare account, serving the site as static assets.
+Live at https://causal-thinking-lab.lnsresearch.ai/ (behind LNS Cloudflare Access; staff sign-in) — the `causal-thinking-lab` Worker in the LNS Research Cloudflare account, serving the site as static assets.
 
 ```
 py tools/build_cf.py        # stages index.html + assets/ into dist/

@@ -23,7 +23,7 @@
   const store = CT.store;
 
   /* ---------- sharing ---------- */
-  const SITE = "https://causal-thinking-lab.sera-holt.workers.dev/";
+  const SITE = "https://causal-thinking-lab.lnsresearch.ai/";
   CT.share = async function (hash, title) {
     const url = SITE + (hash || "");
     const text = title ? `${title}, from the Causal Thinking Lab` : "Causal Thinking Lab: say why, not just what";
