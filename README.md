@@ -70,4 +70,4 @@ py tools/build_cf.py        # stages index.html + assets/ into dist/
 npx wrangler@4 deploy       # uses wrangler.jsonc; needs `wrangler login` with LNS Research access
 ```
 
-GitHub Pages (jrw0116.github.io/Causal_Thinking) still serves the same files; share links and preview tags point at the Cloudflare URL.
+The workers.dev address is turned off (`workers_dev: false`), so the only Cloudflare address is the Access-protected one. GitHub Pages (jrw0116.github.io/Causal_Thinking) still serves the same files; share links and preview tags point at the Cloudflare URL.
